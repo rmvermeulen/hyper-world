@@ -1,0 +1,137 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://squares/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://squares/Connector2D.gd" type="Script" id=2]
+[ext_resource path="res://squares/CubeMap.gd" type="Script" id=3]
+[ext_resource path="res://squares/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://squares/Player.gd" type="Script" id=5]
+
+[node name="CubeMap" type="Node2D"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="Room1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 111.936, 90.956 )
+north = NodePath("../C_1N_5N")
+south = NodePath("../C_1S_3N")
+east = NodePath("../C_1E_4N")
+west = NodePath("../C_1W_6N")
+
+[node name="Room2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 145.453, 527.265 )
+north = NodePath("../C_2N_3S")
+south = NodePath("../C_2S_5S")
+east = NodePath("../C_2E_4S")
+west = NodePath("../C_2W_6S")
+
+[node name="Room3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 90.9116, 327.265 )
+north = NodePath("../C_1S_3N")
+south = NodePath("../C_2N_3S")
+east = NodePath("../C_3E_4W")
+west = NodePath("../C_6E_3W")
+
+[node name="Room4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 269.577, 232.457 )
+north = NodePath("../C_1E_4N")
+south = NodePath("../C_2E_4S")
+east = NodePath("../C_4E_5W")
+west = NodePath("../C_3E_4W")
+
+[node name="Room5" parent="." instance=ExtResource( 1 )]
+position = Vector2( 420.654, 430.395 )
+north = NodePath("../C_1N_5N")
+south = NodePath("../C_2S_5S")
+east = NodePath("../C_5E_6W")
+west = NodePath("../C_4E_5W")
+
+[node name="Room6" parent="." instance=ExtResource( 1 )]
+position = Vector2( 570.776, 293.184 )
+north = NodePath("../C_1W_6N")
+south = NodePath("../C_2W_6S")
+east = NodePath("../C_6E_3W")
+west = NodePath("../C_5E_6W")
+
+[node name="C_1N_5N" type="Node" parent="."]
+script = ExtResource( 2 )
+path_a = NodePath("../Room1")
+path_b = NodePath("../Room5")
+
+[node name="C_1E_4N" type="Node" parent="."]
+script = ExtResource( 2 )
+path_a = NodePath("../Room1")
+connection_a = 2
+path_b = NodePath("../Room4")
+
+[node name="C_1S_3N" type="Node" parent="."]
+script = ExtResource( 2 )
+path_a = NodePath("../Room1")
+connection_a = 1
+path_b = NodePath("../Room3")
+
+[node name="C_1W_6N" type="Node" parent="."]
+script = ExtResource( 2 )
+path_a = NodePath("../Room1")
+connection_a = 3
+path_b = NodePath("../Room6")
+
+[node name="C_3E_4W" type="Node" parent="."]
+script = ExtResource( 2 )
+path_a = NodePath("../Room3")
+connection_a = 2
+path_b = NodePath("../Room4")
+connection_b = 3
+
+[node name="C_4E_5W" type="Node" parent="."]
+script = ExtResource( 2 )
+path_a = NodePath("../Room4")
+connection_a = 2
+path_b = NodePath("../Room5")
+connection_b = 3
+
+[node name="C_5E_6W" type="Node" parent="."]
+script = ExtResource( 2 )
+path_a = NodePath("../Room5")
+connection_a = 2
+path_b = NodePath("../Room6")
+connection_b = 3
+
+[node name="C_6E_3W" type="Node" parent="."]
+script = ExtResource( 2 )
+path_a = NodePath("../Room6")
+connection_a = 2
+path_b = NodePath("../Room3")
+connection_b = 3
+
+[node name="C_2N_3S" type="Node" parent="."]
+script = ExtResource( 2 )
+path_a = NodePath("../Room2")
+path_b = NodePath("../Room3")
+connection_b = 1
+
+[node name="C_2E_4S" type="Node" parent="."]
+script = ExtResource( 2 )
+path_a = NodePath("../Room2")
+connection_a = 2
+path_b = NodePath("../Room4")
+connection_b = 1
+
+[node name="C_2S_5S" type="Node" parent="."]
+script = ExtResource( 2 )
+path_a = NodePath("../Room2")
+connection_a = 1
+path_b = NodePath("../Room5")
+connection_b = 1
+
+[node name="C_2W_6S" type="Node" parent="."]
+script = ExtResource( 2 )
+path_a = NodePath("../Room2")
+connection_a = 3
+path_b = NodePath("../Room6")
+connection_b = 1
+
+[node name="Player" type="Area2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 100.618, 117.112 )
+script = ExtResource( 5 )
