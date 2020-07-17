@@ -8,6 +8,50 @@ func _ready():
 	for c in get_children():
 		if c is Connector2D:
 			connectors.append(c)
+	var re = RegEx.new()
+	re.compile("\\d(\\w)")
+	for c in connectors:
+		var ms = re.search_all(c.name)
+		assert(ms.size() == 2)
+		var ta = ms[0].get_string(1)
+		var tb = ms[1].get_string(1)
+		var t = Transform2D()
+		if ta != tb:
+			match ta:
+				'N':
+					match tb:
+						'E':
+							t = t.rotated(deg2rad(90))
+						'S':
+							t = t.rotated(deg2rad(180))
+						'W':
+							t = t.rotated(deg2rad(-90))
+				'E':
+					match tb:
+						'S':
+							t = t.rotated(deg2rad(90))
+						'W':
+							t = t.rotated(deg2rad(180))
+						'N':
+							t = t.rotated(deg2rad(-90))
+				'S':
+					match tb:
+						'W':
+							t = t.rotated(deg2rad(90))
+						'N':
+							t = t.rotated(deg2rad(180))
+						'E':
+							t = t.rotated(deg2rad(-90))
+				'W':
+					match tb:
+						'N':
+							t = t.rotated(deg2rad(90))
+						'E':
+							t = t.rotated(deg2rad(180))
+						'S':
+							t = t.rotated(deg2rad(-90))
+		# assign rotated transform to connector
+		c.a_to_b = t
 
 
 func _process(_delta):
