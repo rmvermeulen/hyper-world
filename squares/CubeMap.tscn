@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://squares/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://squares/Connector2D.gd" type="Script" id=2]
 [ext_resource path="res://squares/CubeMap.gd" type="Script" id=3]
-[ext_resource path="res://squares/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Dimensionator.gd" type="Script" id=5]
 
 [node name="CubeMap" type="Node2D"]
 script = ExtResource( 3 )
@@ -131,14 +129,3 @@ path_a = NodePath("../Room2")
 connection_a = 3
 path_b = NodePath("../Room6")
 connection_b = 1
-
-[node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 100.618, 117.112 )
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-rotating = true
-current = true
-zoom = Vector2( 0.5, 0.5 )
-
-[node name="Dimensionator" type="Node2D" parent="."]
-script = ExtResource( 5 )

@@ -2,6 +2,7 @@ extends Node
 
 
 func _ready():
+	return
 #	for i in range(3, 8):
 	for i in range(2, 6):
 		var q = Quboid.new(i)
