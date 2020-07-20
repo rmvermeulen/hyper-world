@@ -6,6 +6,14 @@ const ROOM_SIZE := 512
 var cube_data = preload("./CubeData.gd").create()
 var current_room_id := "front"
 
+onready var current_slot := $RoomArea/Current
+onready var invisible_slot := $RoomArea/Invisible
+onready var preview_slot := {
+	"north": $RoomArea/Previews/North,
+	"east": $RoomArea/Previews/East,
+	"south": $RoomArea/Previews/South,
+	"west": $RoomArea/Previews/West,
+}
 
 func _ready():
 	assert(cube_data)
@@ -24,13 +32,24 @@ func _ready():
 func _change_room_to(next_room_id: String, dir: String) -> void:
 	var info = cube_data[next_room_id]
 	# rotate the player and camera
-	$Player.rotate(cube_data[current_room_id][dir].angle)
+	# $Player.rotate(cube_data[current_room_id][dir].angle)
 
-	# change preview textures)
+	# move rooms around
+	_swap_slots(current_slot, preview_slot[dir])
 
 	# and we're done
 	current_room_id = next_room_id
 
+func _swap_slots(slot_a, slot_b):
+	assert(slot_a.get_child_count() == 1)
+	assert(slot_b.get_child_count() == 1)
+	var a = slot_a.get_child(0)
+	slot_a.remove_child(a)
+	var b = slot_b.get_child(0)
+	slot_b.remove_child(b)
+
+	slot_a.add_child(b)
+	slot_b.add_child(a)
 
 func _on_Player_body_entered(body):
 	var room = cube_data[current_room_id]

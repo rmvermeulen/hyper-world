@@ -19,34 +19,69 @@ extents = Vector2( 32, 32 )
 script = ExtResource( 4 )
 
 [node name="RoomArea" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Previews" type="Node2D" parent="RoomArea"]
 
-[node name="Top" parent="RoomArea/Previews" instance=ExtResource( 7 )]
+[node name="North" type="Position2D" parent="RoomArea/Previews"]
 position = Vector2( 0, -512 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Bottom" parent="RoomArea/Previews" instance=ExtResource( 6 )]
-position = Vector2( 0, 512 )
+[node name="Top" parent="RoomArea/Previews/North" instance=ExtResource( 7 )]
 
-[node name="Left" parent="RoomArea/Previews" instance=ExtResource( 5 )]
-position = Vector2( -512, 0 )
-
-[node name="Right" parent="RoomArea/Previews" instance=ExtResource( 2 )]
+[node name="East" type="Position2D" parent="RoomArea/Previews"]
 position = Vector2( 512, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Right" parent="RoomArea/Previews/East" instance=ExtResource( 2 )]
+
+[node name="South" type="Position2D" parent="RoomArea/Previews"]
+position = Vector2( 0, 512 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Bottom" parent="RoomArea/Previews/South" instance=ExtResource( 6 )]
+
+[node name="West" type="Position2D" parent="RoomArea/Previews"]
+position = Vector2( -512, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Left" parent="RoomArea/Previews/West" instance=ExtResource( 5 )]
 
 [node name="Current" type="Node2D" parent="RoomArea"]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Front" parent="RoomArea/Current" instance=ExtResource( 8 )]
 
 [node name="Invisible" type="Node2D" parent="RoomArea"]
 position = Vector2( 2000, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Back" parent="RoomArea/Invisible" instance=ExtResource( 1 )]
 
 [node name="Walls" type="Node2D" parent="RoomArea"]
 scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="North" type="Area2D" parent="RoomArea/Walls"]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea/Walls/North"]
 position = Vector2( 0, -160 )
@@ -54,6 +89,9 @@ shape = SubResource( 1 )
 
 [node name="East" type="Area2D" parent="RoomArea/Walls"]
 rotation = 1.5708
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea/Walls/East"]
 position = Vector2( 0, -160 )
@@ -61,6 +99,9 @@ shape = SubResource( 1 )
 
 [node name="South" type="Area2D" parent="RoomArea/Walls"]
 rotation = -3.14159
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea/Walls/South"]
 position = Vector2( 0, -160 )
@@ -68,6 +109,9 @@ shape = SubResource( 1 )
 
 [node name="West" type="Area2D" parent="RoomArea/Walls"]
 rotation = -1.5708
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea/Walls/West"]
 position = Vector2( 0, -160 )
@@ -75,6 +119,10 @@ shape = SubResource( 1 )
 
 [node name="Corners" type="StaticBody2D" parent="RoomArea"]
 scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea/Corners"]
 position = Vector2( -160, -160 )
