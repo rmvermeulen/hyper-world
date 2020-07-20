@@ -1,5 +1,8 @@
 extends Control
 
+func _ready():
+	# todo: remove
+	_on_Button2D_pressed() # skip waiting
 
 func _on_Button2D_pressed():
 	get_tree().change_scene("res://cube3_map_2d/MainScene.tscn")

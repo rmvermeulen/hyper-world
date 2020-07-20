@@ -22,7 +22,7 @@ func _ready():
 
 
 func _change_room_to(next_room_id: String, dir: String) -> void:
-	var info = cube_data\[next_room_id]
+	var info = cube_data[next_room_id]
 	# update labels
 	$RoomArea/Labels/Current.text = next_room_id
 	$RoomArea/Labels/North.text = info.north.id
