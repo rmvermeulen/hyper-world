@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://squares/Room.tscn" type="PackedScene" id=1]
-[ext_resource path="res://squares/Connector2D.gd" type="Script" id=2]
-[ext_resource path="res://squares/CubeMap.gd" type="Script" id=3]
+[ext_resource path="res://testing_a/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://testing_a/Connector2D.gd" type="Script" id=2]
+[ext_resource path="res://testing_a/CubeMap.gd" type="Script" id=3]
+
 
 [node name="CubeMap" type="Node2D"]
 script = ExtResource( 3 )

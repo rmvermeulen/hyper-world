@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://cube3_map_2d/rooms/Back.tscn" type="PackedScene" id=1]
+[ext_resource path="res://cube3_map_2d/rooms/Right.tscn" type="PackedScene" id=2]
+[ext_resource path="res://cube3_map_2d/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://cube3_map_2d/MainScene.gd" type="Script" id=4]
+[ext_resource path="res://cube3_map_2d/rooms/Left.tscn" type="PackedScene" id=5]
+[ext_resource path="res://cube3_map_2d/rooms/Bottom.tscn" type="PackedScene" id=6]
+[ext_resource path="res://cube3_map_2d/rooms/Top.tscn" type="PackedScene" id=7]
+[ext_resource path="res://cube3_map_2d/rooms/Front.tscn" type="PackedScene" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 128, 16 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 32 )
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="RoomArea" type="Node2D" parent="."]
+
+[node name="Previews" type="Node2D" parent="RoomArea"]
+
+[node name="Top" parent="RoomArea/Previews" instance=ExtResource( 7 )]
+position = Vector2( 0, -512 )
+
+[node name="Bottom" parent="RoomArea/Previews" instance=ExtResource( 6 )]
+position = Vector2( 0, 512 )
+
+[node name="Left" parent="RoomArea/Previews" instance=ExtResource( 5 )]
+position = Vector2( -512, 0 )
+
+[node name="Right" parent="RoomArea/Previews" instance=ExtResource( 2 )]
+position = Vector2( 512, 0 )
+
+[node name="Current" type="Node2D" parent="RoomArea"]
+
+[node name="Front" parent="RoomArea/Current" instance=ExtResource( 8 )]
+
+[node name="Invisible" type="Node2D" parent="RoomArea"]
+position = Vector2( 2000, 0 )
+
+[node name="Back" parent="RoomArea/Invisible" instance=ExtResource( 1 )]
+
+[node name="Walls" type="Node2D" parent="RoomArea"]
+scale = Vector2( 2, 2 )
+
+[node name="North" type="Area2D" parent="RoomArea/Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea/Walls/North"]
+position = Vector2( 0, -160 )
+shape = SubResource( 1 )
+
+[node name="East" type="Area2D" parent="RoomArea/Walls"]
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea/Walls/East"]
+position = Vector2( 0, -160 )
+shape = SubResource( 1 )
+
+[node name="South" type="Area2D" parent="RoomArea/Walls"]
+rotation = -3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea/Walls/South"]
+position = Vector2( 0, -160 )
+shape = SubResource( 1 )
+
+[node name="West" type="Area2D" parent="RoomArea/Walls"]
+rotation = -1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea/Walls/West"]
+position = Vector2( 0, -160 )
+shape = SubResource( 1 )
+
+[node name="Corners" type="StaticBody2D" parent="RoomArea"]
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea/Corners"]
+position = Vector2( -160, -160 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RoomArea/Corners"]
+position = Vector2( 160, -160 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="RoomArea/Corners"]
+position = Vector2( 160, 160 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="RoomArea/Corners"]
+position = Vector2( -160, 160 )
+shape = SubResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+rotating = true
+current = true
