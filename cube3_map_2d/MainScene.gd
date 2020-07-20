@@ -1,7 +1,7 @@
 extends Node2D
 
 # const FLOOR_TEXTURE := preload("res://assets/proto-textures/Dark/texture_05.png")
-const ROOM_SIZE := 256
+const ROOM_SIZE := 512
 
 var cube_data = preload("./CubeData.gd").create()
 var current_room_id := "front"
@@ -23,13 +23,6 @@ func _ready():
 
 func _change_room_to(next_room_id: String, dir: String) -> void:
 	var info = cube_data[next_room_id]
-	# update labels
-	$RoomArea/Labels/Current.text = next_room_id
-	$RoomArea/Labels/North.text = info.north.id
-	$RoomArea/Labels/East.text = info.east.id
-	$RoomArea/Labels/South.text = info.south.id
-	$RoomArea/Labels/West.text = info.west.id
-
 	# rotate the player and camera
 	$Player.rotate(cube_data[current_room_id][dir].angle)
 
