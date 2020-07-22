@@ -24,6 +24,10 @@ config/name="HyperWorld"
 run/main_scene="res://MainMenu.tscn"
 config/icon="res://icon.png"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "godot-sqlite" )
+
 [input]
 
 move_up={
