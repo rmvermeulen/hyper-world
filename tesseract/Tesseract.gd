@@ -10,11 +10,16 @@ func _ready():
 	var q = Dimensionator.Quboid.new(4)
 	segments = q.get_lines()
 	# center coordinates
-	for segment in segments:
+	for segment_index in segments.size():
+		var segment = segments[segment_index]
 		for point in segment:
 			for ci in point.size():
 				var coordinate: float = point[ci]
 				point[ci] = 0.5 if coordinate > 0 else -0.5
+		segments[segment_index] = [
+			Vector4.from_fields(segment[0]),
+			Vector4.from_fields(segment[1]),
+		]
 
 
 func _process(delta):
@@ -28,14 +33,10 @@ func _process(delta):
 
 	# add each line segment
 	for segment in segments:
-		add_vertex(center + _project(segment[0]))
-		add_vertex(center + _project(segment[1]))
+		add_vertex(center + segment[0].project())
+		add_vertex(center + segment[1].project())
 	# done
 	end()
-
-
-func _project(v4: Array) -> Vector3:
-	return Vector3(v4[0], v4[1], v4[2])
 
 
 class Vector4:
@@ -70,9 +71,7 @@ class Vector4:
 		return sqrt(length_squared())
 
 	func project() -> Vector3:
-		var s := length()
-		assert(s >= 0)
-		return Vector3(x, y, z) * s
+		return Vector3(get_x(), get_y(), get_z()) * length()
 
 	func rotated(amount: float) -> Vector4:
 		var v := Vector4.from_fields(_fields)
