@@ -30,10 +30,59 @@ func _process(delta):
 	for segment in segments:
 		add_vertex(center + _project(segment[0]))
 		add_vertex(center + _project(segment[1]))
-
 	# done
 	end()
 
 
 func _project(v4: Array) -> Vector3:
 	return Vector3(v4[0], v4[1], v4[2])
+
+
+class Vector4:
+	var x: float setget , get_x
+	var y: float setget , get_y
+	var z: float setget , get_z
+	var w: float setget , get_w
+	var _fields := []
+
+	func get_x():
+		return _fields[0]
+
+	func get_y():
+		return _fields[1]
+
+	func get_z():
+		return _fields[2]
+
+	func get_w():
+		return _fields[3]
+
+	func _init(x: float, y: float, z: float, w: float):
+		_fields = [x, y, z, w]
+
+	func length_squared() -> float:
+		var squares := 0.0
+		for i in 4:
+			squares += _fields[i] * _fields[i]
+		return squares
+
+	func length() -> float:
+		return sqrt(length_squared())
+
+	func project() -> Vector3:
+		var s := length()
+		assert(s >= 0)
+		return Vector3(x, y, z) * s
+
+	func rotated(amount: float) -> Vector4:
+		var v := Vector4.from_fields(_fields)
+		v.x *= cos(amount)
+		v.y *= sin(amount)
+		return v
+
+	func _to_string():
+		return "Vector4(%.2f, %.2f, %.2f, %.2f)" % _fields
+
+	static func from_fields(v4: Array) -> Vector4:
+		assert(v4.size() >= 4)
+		return Vector4.new(v4[0], v4[1], v4[2], v4[3])
