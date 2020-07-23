@@ -17,8 +17,8 @@ func _ready():
 				var coordinate: float = point[ci]
 				point[ci] = 0.5 if coordinate > 0 else -0.5
 		segments[segment_index] = [
-			Vector4.callv("new", segment[0]),
-			Vector4.callv("new", segment[1]),
+			segment[0],
+			segment[1],
 		]
 
 
@@ -33,41 +33,9 @@ func _process(delta):
 
 	# add each line segment
 	for segment in segments:
-		add_vertex(center + segment[0].project())
-		add_vertex(center + segment[1].project())
+		var ar = segment[0].rotated(0)
+		var br = segment[1].rotated(0)
+		add_vertex(center + ar.project())
+		add_vertex(center + br.project())
 	# done
 	end()
-
-
-class Vector4:
-	var x: float
-	var y: float
-	var z: float
-	var w: float
-
-	func _init(x: float, y: float, z: float, w: float):
-		self.x = x
-		self.y = y
-		self.z = z
-		self.w = w
-
-	func length_squared() -> float:
-		return x * x + y * y + z * z + w * w
-
-	func length() -> float:
-		return sqrt(length_squared())
-
-	func project() -> Vector3:
-		return Vector3(x, y, z) * ((1.0 - (w)) + length())
-
-	func rotated(amount: float) -> Vector4:
-		var v := duplicate()
-		v.x *= cos(amount)
-		v.y *= sin(amount)
-		return v
-
-	func _to_string():
-		return "Vector4(%.2f, %.2f, %.2f, %.2f)" % [x, y, z, w]
-
-	func duplicate() -> Vector4:
-		return Vector4.new(x, y, z, w)

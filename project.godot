@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Connector2D",
 "language": "GDScript",
 "path": "res://testing_a/Connector2D.gd"
+}, {
+"base": "Reference",
+"class": "Hyper",
+"language": "GDScript",
+"path": "res://tesseract/Hyper.gd"
 } ]
 _global_script_class_icons={
-"Connector2D": ""
+"Connector2D": "",
+"Hyper": ""
 }
 
 [application]
