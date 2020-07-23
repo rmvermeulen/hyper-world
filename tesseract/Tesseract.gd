@@ -17,8 +17,8 @@ func _ready():
 				var coordinate: float = point[ci]
 				point[ci] = 0.5 if coordinate > 0 else -0.5
 		segments[segment_index] = [
-			Vector4.from_fields(segment[0]),
-			Vector4.from_fields(segment[1]),
+			Vector4.callv("new", segment[0]),
+			Vector4.callv("new", segment[1]),
 		]
 
 
@@ -40,48 +40,34 @@ func _process(delta):
 
 
 class Vector4:
-	var x: float setget , get_x
-	var y: float setget , get_y
-	var z: float setget , get_z
-	var w: float setget , get_w
-	var _fields := []
-
-	func get_x():
-		return _fields[0]
-
-	func get_y():
-		return _fields[1]
-
-	func get_z():
-		return _fields[2]
-
-	func get_w():
-		return _fields[3]
+	var x: float
+	var y: float
+	var z: float
+	var w: float
 
 	func _init(x: float, y: float, z: float, w: float):
-		_fields = [x, y, z, w]
+		self.x = x
+		self.y = y
+		self.z = z
+		self.w = w
 
 	func length_squared() -> float:
-		var squares := 0.0
-		for i in 4:
-			squares += _fields[i] * _fields[i]
-		return squares
+		return x * x + y * y + z * z + w * w
 
 	func length() -> float:
 		return sqrt(length_squared())
 
 	func project() -> Vector3:
-		return Vector3(get_x(), get_y(), get_z()) * length()
+		return Vector3(x, y, z) * ((1.0 - (w)) + length())
 
 	func rotated(amount: float) -> Vector4:
-		var v := Vector4.from_fields(_fields)
+		var v := duplicate()
 		v.x *= cos(amount)
 		v.y *= sin(amount)
 		return v
 
 	func _to_string():
-		return "Vector4(%.2f, %.2f, %.2f, %.2f)" % _fields
+		return "Vector4(%.2f, %.2f, %.2f, %.2f)" % [x, y, z, w]
 
-	static func from_fields(v4: Array) -> Vector4:
-		assert(v4.size() >= 4)
-		return Vector4.new(v4[0], v4[1], v4[2], v4[3])
+	func duplicate() -> Vector4:
+		return Vector4.new(x, y, z, w)
