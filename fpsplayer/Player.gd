@@ -1,25 +1,23 @@
 extends KinematicBody
-#Variables
-var global = "root/global"
 
 const GRAVITY = -32.8
-var vel = Vector3()
 const MAX_SPEED = 10
 const JUMP_SPEED = 12
 const ACCEL = 4.5
-
-var dir = Vector3()
-
 const DEACCEL = 16
 const MAX_SLOPE_ANGLE = 40
+const MOUSE_SENSITIVITY = 0.05
+const MAX_SPRINT_SPEED = 20
+const SPRINT_ACCEL = 18
+
+var global = "root/global"
+
+var vel = Vector3()
+var dir = Vector3()
 
 var camera
 var rotation_helper
 
-var MOUSE_SENSITIVITY = 0.05
-
-const MAX_SPRINT_SPEED = 20
-const SPRINT_ACCEL = 18
 var is_sprinting = false
 
 var flashlight
@@ -35,11 +33,22 @@ func _ready():
 
 
 func _physics_process(delta):
-	process_input(delta)
-	process_movement(delta)
+	_process_input(delta)
+	_process_movement(delta)
 
 
-func process_input(delta):
+func _process_input(_delta):
+	var cam_input = Vector2()
+	if Input.is_action_pressed("ui_up"):
+		cam_input.y -= 1
+	if Input.is_action_pressed("ui_down"):
+		cam_input.y += 1
+	if Input.is_action_pressed("ui_left"):
+		cam_input.x -= 1
+	if Input.is_action_pressed("ui_right"):
+		cam_input.x += 1
+	if cam_input.length_squared() > 0:
+		_camera_rotation_input(cam_input * 50)
 	# ----------------------------------
 	# Walking
 	dir = Vector3()
@@ -90,7 +99,7 @@ func process_input(delta):
 # ----------------------------------
 
 
-func process_movement(delta):
+func _process_movement(delta):
 	dir.y = 0
 	dir = dir.normalized()
 
@@ -116,9 +125,13 @@ func process_movement(delta):
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		rotation_helper.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
-		self.rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1))
+		_camera_rotation_input(event.relative * MOUSE_SENSITIVITY)
 
-		var camera_rot = rotation_helper.rotation_degrees
-		camera_rot.x = clamp(camera_rot.x, -80, 80)
-		rotation_helper.rotation_degrees = camera_rot
+
+func _camera_rotation_input(move: Vector2) -> void:
+	rotation_helper.rotate_x(deg2rad(move.y))
+	self.rotate_y(deg2rad(move.x * -1))
+
+	var camera_rot = rotation_helper.rotation_degrees
+	camera_rot.x = clamp(camera_rot.x, -80, 80)
+	rotation_helper.rotation_degrees = camera_rot
