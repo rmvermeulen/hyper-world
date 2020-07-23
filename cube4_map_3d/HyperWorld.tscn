@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://cube4_map_3d/ShellOuterMat.tres" type="Material" id=1]
+[ext_resource path="res://fpsplayer/Player.tscn" type="PackedScene" id=2]
+
+[sub_resource type="CubeMesh" id=1]
+material = ExtResource( 1 )
+flip_faces = true
+size = Vector3( 20, 20, 20 )
+
+[sub_resource type="ConcavePolygonShape" id=2]
+data = PoolVector3Array( 10, 10, 10, -10, 10, 10, -10, -10, 10, 10, -10, 10, 10, 10, 10, -10, -10, 10, -10, 10, -10, 10, 10, -10, 10, -10, -10, -10, -10, -10, -10, 10, -10, 10, -10, -10, 10, 10, -10, 10, 10, 10, 10, -10, 10, 10, -10, -10, 10, 10, -10, 10, -10, 10, -10, 10, 10, -10, 10, -10, -10, -10, -10, -10, -10, 10, -10, 10, 10, -10, -10, -10, -10, 10, 10, 10, 10, 10, 10, 10, -10, -10, 10, -10, -10, 10, 10, 10, 10, -10, 10, -10, 10, -10, -10, 10, -10, -10, -10, 10, -10, -10, 10, -10, 10, -10, -10, -10 )
+
+[node name="HyperWorld" type="Spatial"]
+
+[node name="RoomShell" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="RoomShell"]
+
+[node name="CollisionShape" type="CollisionShape" parent="RoomShell/StaticBody"]
+shape = SubResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
