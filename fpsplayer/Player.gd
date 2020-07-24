@@ -37,7 +37,7 @@ func _physics_process(delta):
 	_process_movement(delta)
 
 
-func _process_input(_delta):
+func _process_input(delta):
 	var cam_input = Vector2()
 	if Input.is_action_pressed("ui_up"):
 		cam_input.y -= 1
@@ -48,7 +48,7 @@ func _process_input(_delta):
 	if Input.is_action_pressed("ui_right"):
 		cam_input.x += 1
 	if cam_input.length_squared() > 0:
-		_camera_rotation_input(cam_input * 50)
+		_camera_rotation_input(delta * cam_input * 250)
 	# ----------------------------------
 	# Walking
 	dir = Vector3()
