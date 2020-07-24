@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://cube4_map_3d/WallPlateMat.tres" type="Material" id=1]
+
+[sub_resource type="QuadMesh" id=1]
+material = ExtResource( 1 )
+size = Vector2( 2, 2 )
+
+[sub_resource type="ConcavePolygonShape" id=2]
+data = PoolVector3Array( -1, -1, 0, -1, 1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, 1, -1, 0 )
+
+[node name="WallPlate" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
+shape = SubResource( 2 )
