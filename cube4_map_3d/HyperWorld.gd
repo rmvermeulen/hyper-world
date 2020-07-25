@@ -46,3 +46,5 @@ func _ready():
 
 	assert(room_back)
 	assert(room_back.transform.origin == SLOT_BACK)
+
+# end

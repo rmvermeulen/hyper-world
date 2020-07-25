@@ -23,12 +23,12 @@ class V4:
 		return sqrt(length_squared())
 
 	static func project(v4: Array) -> Vector3:
-		return Vector3(x(v4), y(v4), z(v4)) * ((1.0 - (w(v4))) + length())
+		return Vector3(v4[0], v4[1], v4[2]) * ((1.0 - (v4[3])) + length())
 
 	# static func rotated(v4: Array, amount: float) -> Array:
 	# 	var v := v4.duplicate()
 	# 	# todo
 	# 	return v
 
-	static func _to_string():
-		return "Vector4(%.2f, %.2f, %.2f, %.2f)" % [x, y, z, w]
+	static func to_string(v4: Array) -> String:
+		return "Vector4(%.2f, %.2f, %.2f, %.2f)" % v4
