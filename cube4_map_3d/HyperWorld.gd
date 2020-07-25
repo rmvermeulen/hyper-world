@@ -21,9 +21,11 @@ onready var room_right := $Rooms/RoomRight
 onready var room_front := $Rooms/RoomFront
 onready var room_back := $Rooms/RoomBack
 
+var Tesseract := preload("./TData.gd").new()
+var data := Tesseract.data
 
 func _ready():
-	assert(OK == $Tracker.connect("changed_room", self, "_on_player_changed_room"))
+	assert(Tesseract.is_valid())
 
 	assert(room_inner)
 	assert(room_inner.transform.origin == SLOT_INNER)
@@ -49,8 +51,28 @@ func _ready():
 	assert(room_back)
 	assert(room_back.transform.origin == SLOT_BACK)
 
+static func _room_key(name: String) -> String:
+	if name.find("_") > 0:
+		return name
+	return "ROOM_%s" % name.to_upper()
 
-func _on_player_changed_room(new_room: String):
+func _on_Tracker_player_changed_room(old_room, new_room):
 	prints("player now in room '%s'" % new_room)
+
+	var old_key = _room_key(old_room)
+	var new_key = _room_key(new_room)
+	var info = data[old_key]
+
+	for key in info.keys():
+		var connection = info[key]
+		if connection.room != new_key:
+			continue
+		return _handle_transition(old_room, connection)
+
+	assert(false, "Impossible transition (fauly data)")
+
+func _handle_transition(old_room, connection):
+	prints('transitioning...', old_room, connection)
+	pass
 
 # end

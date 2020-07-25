@@ -1,6 +1,6 @@
 extends Spatial
 
-signal changed_room(new_room)
+signal player_changed_room(old_room, new_room)
 
 var current_room := "inner"
 var states := {
@@ -34,8 +34,8 @@ func _check_state():
 		for k in states.keys():
 			if not states[k] || current_room == k:
 				continue
+			emit_signal("player_changed_room", current_room, k)
 			current_room = k
-			emit_signal("changed_room", current_room)
 			break
 
 
