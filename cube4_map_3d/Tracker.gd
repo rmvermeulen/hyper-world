@@ -16,10 +16,14 @@ func _ready():
 		if not (child is Area):
 			continue
 		var args = [child.name.to_lower()]
-		if not child.is_connected("body_entered", self, "_on_body_entered"):
-			assert(OK == child.connect("body_entered", self, "_on_body_entered", args))
-		if not child.is_connected("body_exited", self, "_on_body_exited"):
-			assert(OK == child.connect("body_exited", self, "_on_body_exited", args))
+		_link(child, "body_entered", args)
+		_link(child, "body_exited", args)
+
+
+func _link(node: Node, action: String, args: Array):
+	var fn := "_on_%s" % action
+	if not node.is_connected(action, self, fn):
+		assert(OK == node.connect(action, self, fn, args))
 
 
 func _check_state():
