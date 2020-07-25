@@ -1,6 +1,6 @@
 extends Spatial
 
-signal changed_room(String)
+signal changed_room(new_room)
 
 var current_room := "inner"
 var states := {
@@ -31,7 +31,7 @@ func _check_state():
 			if not states[k] || current_room == k:
 				continue
 			current_room = k
-			prints("Now in room %s proper" % k)
+			emit_signal("changed_room", current_room)
 			break
 
 

@@ -23,6 +23,8 @@ onready var room_back := $Rooms/RoomBack
 
 
 func _ready():
+	assert(OK == $Tracker.connect("changed_room", self, "_on_player_changed_room"))
+
 	assert(room_inner)
 	assert(room_inner.transform.origin == SLOT_INNER)
 
@@ -46,5 +48,9 @@ func _ready():
 
 	assert(room_back)
 	assert(room_back.transform.origin == SLOT_BACK)
+
+
+func _on_player_changed_room(new_room: String):
+	prints("player now in room '%s'" % new_room)
 
 # end
