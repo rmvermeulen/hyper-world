@@ -22,86 +22,86 @@ const SIDE_BACK := "SIDE_BACK"
 # also think of the 3d projection of a tesseract!
 
 const DEG_90 := 0.5 * PI
-const NONE = Transform()
-const TURN_LEFT := Transform().rotated(Vector3.UP, DEG_90)
-const TURN_RIGHT := Transform().rotated(Vector3.UP, -DEG_90)
-const PITCH_UP := Transform().rotated(Vector3.LEFT, DEG_90)
-const PITCH_DOWN := Transform().rotated(Vector3.LEFT, -DEG_90)
-const ROLL_LEFT := Transform().rotated(Vector3.FORWARD, DEG_90)
-const ROLL_RIGHT := Transform().rotated(Vector3.FORWARD, -DEG_90)
+const T_NONE = Transform()
+var turn_left := Transform().rotated(Vector3.UP, DEG_90)
+var turn_right := Transform().rotated(Vector3.UP, -DEG_90)
+var pitch_up := Transform().rotated(Vector3.LEFT, DEG_90)
+var pitch_down := Transform().rotated(Vector3.LEFT, -DEG_90)
+var roll_left := Transform().rotated(Vector3.FORWARD, DEG_90)
+var roll_right := Transform().rotated(Vector3.FORWARD, -DEG_90)
 
 var data := {
 	ROOM_INNER:
 	{
-		SIDE_TOP: {"room": ROOM_TOP, "side": SIDE_BOTTOM, "transform": NONE},
-		SIDE_BOTTOM: {"room": ROOM_BOTTOM, "side": SIDE_TOP, "transform": NONE},
-		SIDE_LEFT: {"room": ROOM_LEFT, "side": SIDE_RIGHT, "transform": NONE},
-		SIDE_RIGHT: {"room": ROOM_RIGHT, "side": SIDE_LEFT, "transform": NONE},
-		SIDE_FRONT: {"room": ROOM_FRONT, "side": SIDE_BACK, "transform": NONE},
-		SIDE_BACK: {"room": ROOM_BACK, "side": SIDE_FRONT, "transform": NONE},
+		SIDE_TOP: {"room": ROOM_TOP, "side": SIDE_BOTTOM, "transform": T_NONE},
+		SIDE_BOTTOM: {"room": ROOM_BOTTOM, "side": SIDE_TOP, "transform": T_NONE},
+		SIDE_LEFT: {"room": ROOM_LEFT, "side": SIDE_RIGHT, "transform": T_NONE},
+		SIDE_RIGHT: {"room": ROOM_RIGHT, "side": SIDE_LEFT, "transform": T_NONE},
+		SIDE_FRONT: {"room": ROOM_FRONT, "side": SIDE_BACK, "transform": T_NONE},
+		SIDE_BACK: {"room": ROOM_BACK, "side": SIDE_FRONT, "transform": T_NONE},
 	},
 	ROOM_OUTER:
 	{
-		SIDE_TOP: {"room": ROOM_BOTTOM, "side": SIDE_BOTTOM, "transform": NONE},
-		SIDE_BOTTOM: {"room": ROOM_TOP, "side": SIDE_TOP, "transform": NONE},
-		SIDE_LEFT: {"room": ROOM_RIGHT, "side": SIDE_LEFT, "transform": NONE},
-		SIDE_RIGHT: {"room": ROOM_LEFT, "side": SIDE_RIGHT, "transform": NONE},
-		SIDE_FRONT: {"room": ROOM_BACK, "side": SIDE_FRONT, "transform": NONE},
-		SIDE_BACK: {"room": ROOM_FRONT, "side": SIDE_BACK, "transform": NONE},
+		SIDE_TOP: {"room": ROOM_BOTTOM, "side": SIDE_BOTTOM, "transform": T_NONE},
+		SIDE_BOTTOM: {"room": ROOM_TOP, "side": SIDE_TOP, "transform": T_NONE},
+		SIDE_LEFT: {"room": ROOM_RIGHT, "side": SIDE_LEFT, "transform": T_NONE},
+		SIDE_RIGHT: {"room": ROOM_LEFT, "side": SIDE_RIGHT, "transform": T_NONE},
+		SIDE_FRONT: {"room": ROOM_BACK, "side": SIDE_FRONT, "transform": T_NONE},
+		SIDE_BACK: {"room": ROOM_FRONT, "side": SIDE_BACK, "transform": T_NONE},
 	},
 	ROOM_FRONT:
 	{
-		SIDE_TOP: {"room": ROOM_TOP, "side": SIDE_FRONT, "transform": PITCH_UP},
-		SIDE_BOTTOM: {"room": ROOM_BOTTOM, "side": SIDE_FRONT, "transform": PITCH_DOWN},
-		SIDE_LEFT: {"room": ROOM_LEFT, "side": SIDE_FRONT, "transform": TURN_RIGHT},
-		SIDE_RIGHT: {"room": ROOM_RIGHT, "side": SIDE_FRONT, "transform": TURN_LEFT},
-		SIDE_FRONT: {"room": ROOM_OUTER, "side": SIDE_BACK, "transform": NONE},
-		SIDE_BACK: {"room": ROOM_INNER, "side": SIDE_FRONT, "transform": NONE},
+		SIDE_TOP: {"room": ROOM_TOP, "side": SIDE_FRONT, "transform": pitch_up},
+		SIDE_BOTTOM: {"room": ROOM_BOTTOM, "side": SIDE_FRONT, "transform": pitch_down},
+		SIDE_LEFT: {"room": ROOM_LEFT, "side": SIDE_FRONT, "transform": turn_right},
+		SIDE_RIGHT: {"room": ROOM_RIGHT, "side": SIDE_FRONT, "transform": turn_left},
+		SIDE_FRONT: {"room": ROOM_OUTER, "side": SIDE_BACK, "transform": T_NONE},
+		SIDE_BACK: {"room": ROOM_INNER, "side": SIDE_FRONT, "transform": T_NONE},
 	},
 	ROOM_BACK:
 	{
-		SIDE_TOP: {"room": ROOM_TOP, "side": SIDE_BACK, "transform": PITCH_DOWN},
-		SIDE_BOTTOM: {"room": ROOM_BOTTOM, "side": SIDE_BACK, "transform": PITCH_UP},
-		SIDE_LEFT: {"room": ROOM_LEFT, "side": SIDE_BACK, "transform": TURN_LEFT},
-		SIDE_RIGHT: {"room": ROOM_RIGHT, "side": SIDE_BACK, "transform": TURN_RIGHT},
-		SIDE_FRONT: {"room": ROOM_INNER, "side": SIDE_BACK, "transform": NONE},
-		SIDE_BACK: {"room": ROOM_OUTER, "side": SIDE_FRONT, "transform": NONE},
+		SIDE_TOP: {"room": ROOM_TOP, "side": SIDE_BACK, "transform": pitch_down},
+		SIDE_BOTTOM: {"room": ROOM_BOTTOM, "side": SIDE_BACK, "transform": pitch_up},
+		SIDE_LEFT: {"room": ROOM_LEFT, "side": SIDE_BACK, "transform": turn_left},
+		SIDE_RIGHT: {"room": ROOM_RIGHT, "side": SIDE_BACK, "transform": turn_right},
+		SIDE_FRONT: {"room": ROOM_INNER, "side": SIDE_BACK, "transform": T_NONE},
+		SIDE_BACK: {"room": ROOM_OUTER, "side": SIDE_FRONT, "transform": T_NONE},
 	},
 	ROOM_LEFT:
 	{
-		SIDE_TOP: {"room": ROOM_TOP, "side": SIDE_LEFT, "transform": ROLL_LEFT},
-		SIDE_BOTTOM: {"room": ROOM_BOTTOM, "side": SIDE_LEFT, "transform": ROLL_RIGHT},
-		SIDE_LEFT: {"room": ROOM_OUTER, "side": SIDE_RIGHT, "transform": NONE},
-		SIDE_RIGHT: {"room": ROOM_INNER, "side": SIDE_LEFT, "transform": NONE},
-		SIDE_FRONT: {"room": ROOM_FRONT, "side": SIDE_LEFT, "transform": TURN_LEFT},
-		SIDE_BACK: {"room": ROOM_BACK, "side": SIDE_LEFT, "transform": TURN_RIGHT},
+		SIDE_TOP: {"room": ROOM_TOP, "side": SIDE_LEFT, "transform": roll_left},
+		SIDE_BOTTOM: {"room": ROOM_BOTTOM, "side": SIDE_LEFT, "transform": roll_right},
+		SIDE_LEFT: {"room": ROOM_OUTER, "side": SIDE_RIGHT, "transform": T_NONE},
+		SIDE_RIGHT: {"room": ROOM_INNER, "side": SIDE_LEFT, "transform": T_NONE},
+		SIDE_FRONT: {"room": ROOM_FRONT, "side": SIDE_LEFT, "transform": turn_left},
+		SIDE_BACK: {"room": ROOM_BACK, "side": SIDE_LEFT, "transform": turn_right},
 	},
 	ROOM_RIGHT:
 	{
-		SIDE_TOP: {"room": ROOM_TOP, "side": SIDE_RIGHT, "transform": ROLL_RIGHT},
-		SIDE_BOTTOM: {"room": ROOM_BOTTOM, "side": SIDE_RIGHT, "transform": ROLL_LEFT},
-		SIDE_LEFT: {"room": ROOM_INNER, "side": SIDE_RIGHT, "transform": NONE},
-		SIDE_RIGHT: {"room": ROOM_OUTER, "side": SIDE_LEFT, "transform": NONE},
-		SIDE_FRONT: {"room": ROOM_FRONT, "side": SIDE_RIGHT, "transform": TURN_RIGHT},
-		SIDE_BACK: {"room": ROOM_BACK, "side": SIDE_RIGHT, "transform": TURN_LEFT},
+		SIDE_TOP: {"room": ROOM_TOP, "side": SIDE_RIGHT, "transform": roll_right},
+		SIDE_BOTTOM: {"room": ROOM_BOTTOM, "side": SIDE_RIGHT, "transform": roll_left},
+		SIDE_LEFT: {"room": ROOM_INNER, "side": SIDE_RIGHT, "transform": T_NONE},
+		SIDE_RIGHT: {"room": ROOM_OUTER, "side": SIDE_LEFT, "transform": T_NONE},
+		SIDE_FRONT: {"room": ROOM_FRONT, "side": SIDE_RIGHT, "transform": turn_right},
+		SIDE_BACK: {"room": ROOM_BACK, "side": SIDE_RIGHT, "transform": turn_left},
 	},
 	ROOM_TOP:
 	{
-		SIDE_TOP: {"room": ROOM_OUTER, "side": SIDE_BOTTOM, "transform": NONE},
-		SIDE_BOTTOM: {"room": ROOM_INNER, "side": SIDE_TOP, "transform": NONE},
-		SIDE_LEFT: {"room": ROOM_LEFT, "side": SIDE_TOP, "transform": ROLL_RIGHT},
-		SIDE_RIGHT: {"room": ROOM_RIGHT, "side": SIDE_TOP, "transform": ROLL_LEFT},
-		SIDE_FRONT: {"room": ROOM_FRONT, "side": SIDE_TOP, "transform": PITCH_DOWN},
-		SIDE_BACK: {"room": ROOM_BACK, "side": SIDE_TOP, "transform": PITCH_UP},
+		SIDE_TOP: {"room": ROOM_OUTER, "side": SIDE_BOTTOM, "transform": T_NONE},
+		SIDE_BOTTOM: {"room": ROOM_INNER, "side": SIDE_TOP, "transform": T_NONE},
+		SIDE_LEFT: {"room": ROOM_LEFT, "side": SIDE_TOP, "transform": roll_right},
+		SIDE_RIGHT: {"room": ROOM_RIGHT, "side": SIDE_TOP, "transform": roll_left},
+		SIDE_FRONT: {"room": ROOM_FRONT, "side": SIDE_TOP, "transform": pitch_down},
+		SIDE_BACK: {"room": ROOM_BACK, "side": SIDE_TOP, "transform": pitch_up},
 	},
 	ROOM_BOTTOM:
 	{
-		SIDE_TOP: {"room": ROOM_INNER, "side": SIDE_BOTTOM, "transform": NONE},
-		SIDE_BOTTOM: {"room": ROOM_OUTER, "side": SIDE_TOP, "transform": NONE},
-		SIDE_LEFT: {"room": ROOM_LEFT, "side": SIDE_BOTTOM, "transform": ROLL_LEFT},
-		SIDE_RIGHT: {"room": ROOM_RIGHT, "side": SIDE_BOTTOM, "transform": ROLL_RIGHT},
-		SIDE_FRONT: {"room": ROOM_FRONT, "side": SIDE_BOTTOM, "transform": PITCH_UP},
-		SIDE_BACK: {"room": ROOM_BACK, "side": SIDE_BOTTOM, "transform": PITCH_DOWN},
+		SIDE_TOP: {"room": ROOM_INNER, "side": SIDE_BOTTOM, "transform": T_NONE},
+		SIDE_BOTTOM: {"room": ROOM_OUTER, "side": SIDE_TOP, "transform": T_NONE},
+		SIDE_LEFT: {"room": ROOM_LEFT, "side": SIDE_BOTTOM, "transform": roll_left},
+		SIDE_RIGHT: {"room": ROOM_RIGHT, "side": SIDE_BOTTOM, "transform": roll_right},
+		SIDE_FRONT: {"room": ROOM_FRONT, "side": SIDE_BOTTOM, "transform": pitch_up},
+		SIDE_BACK: {"room": ROOM_BACK, "side": SIDE_BOTTOM, "transform": pitch_down},
 	},
 }
 

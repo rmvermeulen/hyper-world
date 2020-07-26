@@ -1,5 +1,7 @@
 extends Spatial
 
+const TData := preload("res://cube4_map_3d/TData.gd")
+
 const ROOM_SIZE := 20
 
 const SLOT_INNER := Vector3() * ROOM_SIZE
@@ -11,6 +13,9 @@ const SLOT_RIGHT := Vector3.RIGHT * ROOM_SIZE
 # note: front/back in the map data are reversed of the Vector3 constants
 const SLOT_FRONT := Vector3.BACK * ROOM_SIZE
 const SLOT_BACK := Vector3.FORWARD * ROOM_SIZE
+
+var data = TData.new()
+var _player_current_room_transform := Transform()
 
 onready var room_inner := $Rooms/RoomInner
 onready var room_outer := $Rooms/RoomOuter
@@ -78,7 +83,145 @@ func _ready():
 	assert(s1.extents == room_quadrant)
 
 
-func _on_player_changed_room(new_room: String):
-	prints("player now in room '%s'" % new_room)
+func _on_player_changed_room(new_room_tag: String):
+	if new_room_tag == "inner":
+		return
+
+	# re-organize room
+	prints("re-organize scene", new_room_tag)
+
+	match new_room_tag:
+		"front":
+			_rotate_tesseract_backward()
+		"back":
+			_rotate_tesseract_forward()
+		"top":
+			_rotate_tesseract_down()
+		"bottom":
+			_rotate_tesseract_up()
+		"left":
+			_rotate_tesseract_right()
+		"right":
+			_rotate_tesseract_left()
+
+	# move player to wrapped position
+	var extent = .5 * ROOM_SIZE
+	var pos: Vector3 = $Player.transform.origin
+	pos.x = wrapf(pos.x, -extent, extent)
+	pos.y = wrapf(pos.y, -extent, extent)
+	pos.z = wrapf(pos.z, -extent, extent)
+	$Player.transform.origin = pos
+
+	# done
+	prints("done")
+
+
+func _rotate_tesseract_up() -> void:
+	var inner := _room_at(SLOT_INNER)
+	# bottom -> inner
+	_room_at(SLOT_BOTTOM).transform.origin = SLOT_INNER
+	# outer -> bottom
+	_room_at(SLOT_OUTER).transform.origin = SLOT_BOTTOM
+	# top -> outer
+	_room_at(SLOT_TOP).transform.origin = SLOT_OUTER
+	# inner -> top
+	inner.transform.origin = SLOT_TOP
+
+	# front -> pitch down
+	_room_at(SLOT_FRONT).transform *= data.pitch_down
+	# back -> pitch up
+	_room_at(SLOT_BACK).transform *= data.pitch_up
+	# left -> roll left
+	_room_at(SLOT_LEFT).transform *= data.roll_left
+	# right -> roll right
+	_room_at(SLOT_RIGHT).transform *= data.roll_right
+
+
+func _rotate_tesseract_down() -> void:
+	# top -> inner
+	# inner -> bottom
+	# bottom -> outer
+	# outer -> top
+	# front -> pitch up
+	# back -> pitch down
+	# left -> roll right
+	# right -> roll left
+	pass
+
+
+func _rotate_tesseract_left() -> void:
+	# right -> inner
+	# inner -> left
+	# left -> outer
+	# outer -> right
+	# front -> yaw left
+	# back -> yaw right
+	# top -> roll right
+	# bottom -> roll left
+	pass
+
+
+func _rotate_tesseract_right() -> void:
+	# left -> inner
+	# inner -> right
+	# right -> outer
+	# outer -> left
+	# front -> yaw right
+	# back -> yaw left
+	# top -> roll left
+	# bottom -> roll right
+	pass
+
+
+func _rotate_tesseract_forward() -> void:
+	var inner := _room_at(SLOT_INNER)
+	# back -> inner
+	_room_at(SLOT_BACK).transform.origin = SLOT_INNER
+	# outer -> back
+	_room_at(SLOT_OUTER).transform.origin = SLOT_BACK
+	# front -> outer
+	_room_at(SLOT_FRONT).transform.origin = SLOT_OUTER
+	# inner -> front
+	inner.transform.origin = SLOT_FRONT
+
+	# left -> yaw right
+	_room_at(SLOT_LEFT).transform *= data.turn_right
+	# right -> yaw left
+	_room_at(SLOT_RIGHT).transform *= data.turn_left
+	# top -> pitch up
+	_room_at(SLOT_TOP).transform *= data.pitch_up
+	# bottom -> pitch down
+	_room_at(SLOT_BOTTOM).transform *= data.pitch_down
+
+
+func _rotate_tesseract_backward() -> void:
+	var inner := _room_at(SLOT_INNER)
+	# front -> inner
+	_room_at(SLOT_FRONT).transform.origin = SLOT_INNER
+	# outer -> front
+	_room_at(SLOT_OUTER).transform.origin = SLOT_FRONT
+	# back -> outer
+	_room_at(SLOT_BACK).transform.origin = SLOT_OUTER
+	# inner -> back
+	inner.transform.origin = SLOT_BACK
+
+	# left -> yaw left
+	_room_at(SLOT_LEFT).transform *= data.turn_left
+	# right -> yaw right
+	_room_at(SLOT_RIGHT).transform *= data.turn_right
+	# top -> pitch down
+	_room_at(SLOT_TOP).transform *= data.pitch_down
+	# bottom -> pitch up
+	_room_at(SLOT_BOTTOM).transform *= data.pitch_up
+
+
+func _room_at(pos: Vector3) -> Spatial:
+	var room = null
+	for child in $Rooms.get_children():
+		if child.transform.origin.distance_squared_to(pos) < 0.5:
+			room = child
+			break
+	assert(room)
+	return room
 
 # end

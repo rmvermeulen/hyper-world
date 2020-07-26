@@ -11,7 +11,6 @@ var states := {
 
 
 func _ready():
-	var amount := 0
 	for child in get_children():
 		if not (child is Area):
 			continue
