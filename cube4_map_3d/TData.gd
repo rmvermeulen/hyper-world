@@ -22,13 +22,13 @@ const SIDE_BACK := "SIDE_BACK"
 # also think of the 3d projection of a tesseract!
 
 const DEG_90 := 0.5 * PI
-const NONE := Transform()
-var TURN_LEFT := Transform().rotated(Vector3.UP, DEG_90)
-var TURN_RIGHT := Transform().rotated(Vector3.UP, -DEG_90)
-var PITCH_UP := Transform().rotated(Vector3.LEFT, DEG_90)
-var PITCH_DOWN := Transform().rotated(Vector3.LEFT, -DEG_90)
-var ROLL_LEFT := Transform().rotated(Vector3.FORWARD, DEG_90)
-var ROLL_RIGHT := Transform().rotated(Vector3.FORWARD, -DEG_90)
+const NONE = Transform()
+const TURN_LEFT := Transform().rotated(Vector3.UP, DEG_90)
+const TURN_RIGHT := Transform().rotated(Vector3.UP, -DEG_90)
+const PITCH_UP := Transform().rotated(Vector3.LEFT, DEG_90)
+const PITCH_DOWN := Transform().rotated(Vector3.LEFT, -DEG_90)
+const ROLL_LEFT := Transform().rotated(Vector3.FORWARD, DEG_90)
+const ROLL_RIGHT := Transform().rotated(Vector3.FORWARD, -DEG_90)
 
 var data := {
 	ROOM_INNER:
