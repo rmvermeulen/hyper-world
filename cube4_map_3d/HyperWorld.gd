@@ -17,48 +17,47 @@ const SLOT_BACK := Vector3.FORWARD * ROOM_SIZE
 var data = TData.new()
 var _player_current_room_transform := Transform()
 
-onready var room_inner := $Rooms/RoomInner
-onready var room_outer := $Rooms/RoomOuter
-onready var room_top := $Rooms/RoomTop
-onready var room_bottom := $Rooms/RoomBottom
-onready var room_left := $Rooms/RoomLeft
-onready var room_right := $Rooms/RoomRight
-onready var room_front := $Rooms/RoomFront
-onready var room_back := $Rooms/RoomBack
-
 
 func _ready():
 	assert(OK == $Tracker.connect("changed_room", self, "_on_player_changed_room"))
 
 	# check room size and alignment
+	var room_inner := $Rooms/RoomInner
 	assert(room_inner)
 	room_inner.transform.origin = SLOT_INNER
 	assert(room_inner.transform.origin == SLOT_INNER)
 
+	var room_outer := $Rooms/RoomOuter
 	assert(room_outer)
 	room_outer.transform.origin = SLOT_OUTER
 	assert(room_outer.transform.origin == SLOT_OUTER)
 
+	var room_top := $Rooms/RoomTop
 	assert(room_top)
 	room_top.transform.origin = SLOT_TOP
 	assert(room_top.transform.origin == SLOT_TOP)
 
+	var room_bottom := $Rooms/RoomBottom
 	assert(room_bottom)
 	room_bottom.transform.origin = SLOT_BOTTOM
 	assert(room_bottom.transform.origin == SLOT_BOTTOM)
 
+	var room_left := $Rooms/RoomLeft
 	assert(room_left)
 	room_left.transform.origin = SLOT_LEFT
 	assert(room_left.transform.origin == SLOT_LEFT)
 
+	var room_right := $Rooms/RoomRight
 	assert(room_right)
 	room_right.transform.origin = SLOT_RIGHT
 	assert(room_right.transform.origin == SLOT_RIGHT)
 
+	var room_front := $Rooms/RoomFront
 	assert(room_front)
 	room_front.transform.origin = SLOT_FRONT
 	assert(room_front.transform.origin == SLOT_FRONT)
 
+	var room_back := $Rooms/RoomBack
 	assert(room_back)
 	room_back.transform.origin = SLOT_BACK
 	assert(room_back.transform.origin == SLOT_BACK)
