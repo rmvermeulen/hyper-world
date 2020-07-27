@@ -2,9 +2,9 @@
 
 [ext_resource path="res://MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://AtarianSystem.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://cube3_map_2d/TopDown.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/cube-topdown/TopDown.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ButtonExit.gd" type="Script" id=4]
-[ext_resource path="res://cube4_map_3d/HyperWorld.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/tesseract-fps/HyperWorld.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32

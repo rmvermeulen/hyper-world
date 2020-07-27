@@ -1,7 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://cube4_map_3d/ShellOuterMat.tres" type="Material" id=1]
-[ext_resource path="res://cube4_map_3d/WallPlate.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/ShellOuterMat.tres" type="Material" id=1]
+[ext_resource path="res://scenes/tesseract-fps/WallPlate.tscn" type="PackedScene" id=2]
+
+
+
 
 [node name="Walls" type="Spatial"]
 

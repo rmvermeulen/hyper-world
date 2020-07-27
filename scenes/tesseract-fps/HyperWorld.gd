@@ -1,6 +1,6 @@
 extends Spatial
 
-const TData := preload("res://cube4_map_3d/TData.gd")
+const TData := preload("res://resources/tesseract/Data.gd")
 
 const ROOM_SIZE := 20
 

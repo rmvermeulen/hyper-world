@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/simplefps-icon.png-41886148c81996ed4bc365f1acc2b7ea.stex"
+path="res://.import/simplefps-icon.png-1e3b2f417491ae69ec3e9b61fc8f2a2b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://fpsplayer/simplefps-icon.png"
-dest_files=[ "res://.import/simplefps-icon.png-41886148c81996ed4bc365f1acc2b7ea.stex" ]
+source_file="res://components/fpsplayer/simplefps-icon.png"
+dest_files=[ "res://.import/simplefps-icon.png-1e3b2f417491ae69ec3e9b61fc8f2a2b.stex" ]
 
 [params]
 

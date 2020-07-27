@@ -1,13 +1,16 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://cube3_map_2d/rooms/Back.tscn" type="PackedScene" id=1]
-[ext_resource path="res://cube3_map_2d/rooms/Right.tscn" type="PackedScene" id=2]
-[ext_resource path="res://cube3_map_2d/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://cube3_map_2d/TopDown.gd" type="Script" id=4]
-[ext_resource path="res://cube3_map_2d/rooms/Left.tscn" type="PackedScene" id=5]
-[ext_resource path="res://cube3_map_2d/rooms/Bottom.tscn" type="PackedScene" id=6]
-[ext_resource path="res://cube3_map_2d/rooms/Top.tscn" type="PackedScene" id=7]
-[ext_resource path="res://cube3_map_2d/rooms/Front.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/cube-topdown/rooms/Back.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/cube-topdown/rooms/Right.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/cube-topdown/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/cube-topdown/TopDown.gd" type="Script" id=4]
+[ext_resource path="res://scenes/cube-topdown/rooms/Left.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/cube-topdown/rooms/Bottom.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/cube-topdown/rooms/Top.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/cube-topdown/rooms/Front.tscn" type="PackedScene" id=8]
+
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 128, 16 )

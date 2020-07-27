@@ -1,10 +1,10 @@
 extends Spatial
 
-const TData := preload("res://cube4_map_3d/TData.gd")
+const Data := preload("./Data.gd")
 
 
 func _ready():
-	var data = TData.new()
+	var data = Data.new()
 	prints(data)
 	if data.is_valid():
 		prints("Valid data!")
