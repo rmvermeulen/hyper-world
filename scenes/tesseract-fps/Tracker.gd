@@ -7,6 +7,10 @@ var states := {
 	"inner": false,
 	"front": false,
 	"back": false,
+	"top": false,
+	"down": false,
+	"left": false,
+	"right": false,
 }
 
 

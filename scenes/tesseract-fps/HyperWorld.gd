@@ -114,6 +114,18 @@ func _on_player_changed_room(new_room_tag: String):
 	# done
 	prints("done")
 
+	
+# helper methods
+func _room_at(pos: Vector3) -> Spatial:
+	var room = null
+	for child in $Rooms.get_children():
+		if child.transform.origin.distance_squared_to(pos) < 0.5:
+			room = child
+			break
+	assert(room)
+	return room
+
+# tesseract rotation methods
 
 func _rotate_tesseract_up() -> void:
 	var inner := _room_at(SLOT_INNER)
@@ -137,39 +149,66 @@ func _rotate_tesseract_up() -> void:
 
 
 func _rotate_tesseract_down() -> void:
+	var inner := _room_at(SLOT_INNER)
 	# top -> inner
-	# inner -> bottom
-	# bottom -> outer
+	_room_at(SLOT_TOP).transform.origin = SLOT_INNER
 	# outer -> top
+	_room_at(SLOT_OUTER).transform.origin = SLOT_TOP
+	# bottom -> outer
+	_room_at(SLOT_BOTTOM).transform.origin = SLOT_OUTER
+	# inner -> bottom
+	inner.transform.origin = SLOT_BOTTOM
+
 	# front -> pitch up
+	_room_at(SLOT_FRONT).transform *= data.pitch_up
 	# back -> pitch down
+	_room_at(SLOT_BACK).transform *= data.pitch_down
 	# left -> roll right
+	_room_at(SLOT_LEFT).transform *= data.roll_right
 	# right -> roll left
-	pass
+	_room_at(SLOT_RIGHT).transform *= data.roll_left
 
 
 func _rotate_tesseract_left() -> void:
+	var inner := _room_at(SLOT_INNER)
 	# right -> inner
-	# inner -> left
-	# left -> outer
+	_room_at(SLOT_RIGHT).transform.origin = SLOT_INNER
 	# outer -> right
-	# front -> yaw left
-	# back -> yaw right
+	_room_at(SLOT_OUTER).transform.origin = SLOT_RIGHT
+	# left -> outer
+	_room_at(SLOT_LEFT).transform.origin = SLOT_OUTER
+	# inner -> left
+	inner.transform.origin = SLOT_LEFT
+
+	# front -> turn left
+	_room_at(SLOT_FRONT).transform *= data.turn_left
+	# back -> turn right
+	_room_at(SLOT_BACK).transform *= data.turn_right
 	# top -> roll right
+	_room_at(SLOT_TOP).transform *= data.roll_right
 	# bottom -> roll left
-	pass
+	_room_at(SLOT_BOTTOM).transform *= data.roll_left
 
 
 func _rotate_tesseract_right() -> void:
+	var inner := _room_at(SLOT_INNER)
 	# left -> inner
-	# inner -> right
-	# right -> outer
+	_room_at(SLOT_LEFT).transform.origin = SLOT_INNER
 	# outer -> left
-	# front -> yaw right
-	# back -> yaw left
+	_room_at(SLOT_OUTER).transform.origin = SLOT_LEFT
+	# right -> outer
+	_room_at(SLOT_RIGHT).transform.origin = SLOT_OUTER
+	# inner -> right
+	inner.transform.origin = SLOT_RIGHT
+
+	# front -> turn right
+	_room_at(SLOT_FRONT).transform *= data.turn_right
+	# back -> turn left
+	_room_at(SLOT_BACK).transform *= data.turn_left
 	# top -> roll left
+	_room_at(SLOT_TOP).transform *= data.roll_left
 	# bottom -> roll right
-	pass
+	_room_at(SLOT_BOTTOM).transform *= data.roll_right
 
 
 func _rotate_tesseract_forward() -> void:
@@ -183,9 +222,9 @@ func _rotate_tesseract_forward() -> void:
 	# inner -> front
 	inner.transform.origin = SLOT_FRONT
 
-	# left -> yaw right
+	# left -> turn right
 	_room_at(SLOT_LEFT).transform *= data.turn_right
-	# right -> yaw left
+	# right -> turn left
 	_room_at(SLOT_RIGHT).transform *= data.turn_left
 	# top -> pitch up
 	_room_at(SLOT_TOP).transform *= data.pitch_up
@@ -204,9 +243,9 @@ func _rotate_tesseract_backward() -> void:
 	# inner -> back
 	inner.transform.origin = SLOT_BACK
 
-	# left -> yaw left
+	# left -> turn left
 	_room_at(SLOT_LEFT).transform *= data.turn_left
-	# right -> yaw right
+	# right -> turn right
 	_room_at(SLOT_RIGHT).transform *= data.turn_right
 	# top -> pitch down
 	_room_at(SLOT_TOP).transform *= data.pitch_down
@@ -214,13 +253,5 @@ func _rotate_tesseract_backward() -> void:
 	_room_at(SLOT_BOTTOM).transform *= data.pitch_up
 
 
-func _room_at(pos: Vector3) -> Spatial:
-	var room = null
-	for child in $Rooms.get_children():
-		if child.transform.origin.distance_squared_to(pos) < 0.5:
-			room = child
-			break
-	assert(room)
-	return room
 
 # end
