@@ -3,7 +3,7 @@ extends Node2D
 # const FLOOR_TEXTURE := preload("res://assets/proto-textures/Dark/texture_05.png")
 const ROOM_SIZE := 512
 
-var _cube_data = preload("res://resources/cube/data.gd").create()
+var _cube_data = preload("res://resources/cube/Data.gd").create()
 var _current_room_id := "front"
 var _player_room_jump_timeout := 0.0
 
