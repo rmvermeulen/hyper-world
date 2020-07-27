@@ -1,0 +1,20 @@
+{
+  "name": "js-tools",
+  "version": "1.0.0",
+  "license": "GPL-3",
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.gd": [
+      "gdformat --line-length 100",
+      "gdlint"
+    ]
+  }
+}
