@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://MainTheme.tres" type="Theme" id=1]
+[ext_resource path="res://resources/MainTheme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/proto-textures/Dark/texture_05.png" type="Texture" id=2]
 [ext_resource path="res://scenes/cube-topdown/Room.gd" type="Script" id=3]
+
 
 
 
