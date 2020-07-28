@@ -15,12 +15,12 @@ font_data = ExtResource( 2 )
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
 
-[sub_resource type="InputEventKey" id=4]
+[sub_resource type="InputEventKey" id=3]
 pressed = true
 scancode = 16777217
 
-[sub_resource type="ShortCut" id=5]
-shortcut = SubResource( 4 )
+[sub_resource type="ShortCut" id=4]
+shortcut = SubResource( 3 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -41,9 +41,9 @@ __meta__ = {
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer"]
 margin_left = 302.0
-margin_top = 89.0
+margin_top = 90.0
 margin_right = 722.0
-margin_bottom = 509.0
+margin_bottom = 510.0
 rect_min_size = Vector2( 420, 420 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -86,7 +86,7 @@ margin_bottom = 195.0
 rect_min_size = Vector2( 250, 50 )
 hint_tooltip = "Exit the game"
 size_flags_vertical = 6
-shortcut = SubResource( 5 )
+shortcut = SubResource( 4 )
 text = "Exit"
 flat = true
 [connection signal="pressed" from="CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/ButtonExit" to="." method="_on_ButtonExit_pressed"]
