@@ -1,7 +1,7 @@
 {
   "name": "js-tools",
   "version": "1.0.0",
-  "license": "GPL-3",
+  "license": "GPL-3.0",
   "devDependencies": {
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11"
