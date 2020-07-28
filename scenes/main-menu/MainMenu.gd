@@ -14,9 +14,12 @@ func _ready():
 	for i in maps.size():
 		var map = maps[i]
 		var button := exit_button.duplicate()
-		# change text (use resource path)
-		var tail: String = map.resource_path.substr(map.resource_path.find_last("/") + 1)
-		button.text = tail.substr(0, tail.length() - 5)
+		# change text (use resource name/path)
+		if map.resource_name.length() > 0:
+			button.text = map.resource_name
+		else:
+			var tail: String = map.resource_path.substr(map.resource_path.find_last("/") + 1)
+			button.text = tail.substr(0, tail.length() - 5)
 		# change shortcut
 		button.shortcut = _get_shortcut(i)
 		# connect 'pressed'
