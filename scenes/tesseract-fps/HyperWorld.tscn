@@ -1,10 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://scenes/tesseract-fps/HallwayRoomExample.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/tesseract-fps/rooms/RoomFront.tscn" type="PackedScene" id=1]
 [ext_resource path="res://components/fpsplayer/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/tesseract-fps/HyperWorld.gd" type="Script" id=3]
 [ext_resource path="res://scenes/tesseract-fps/Tracker.gd" type="Script" id=4]
-[ext_resource path="res://components/Sign.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/tesseract-fps/rooms/RoomInner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/tesseract-fps/rooms/RoomLeft.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/tesseract-fps/rooms/RoomBottom.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/tesseract-fps/rooms/RoomRight.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/tesseract-fps/rooms/RoomOuter.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/tesseract-fps/rooms/RoomTop.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/tesseract-fps/rooms/RoomBack.tscn" type="PackedScene" id=11]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 10, 10, 10 )
@@ -14,76 +20,28 @@ script = ExtResource( 3 )
 
 [node name="Rooms" type="Spatial" parent="."]
 
-[node name="RoomInner" type="Spatial" parent="Rooms"]
+[node name="RoomInner" parent="Rooms" instance=ExtResource( 5 )]
 
-[node name="Walls" parent="Rooms/RoomInner" instance=ExtResource( 1 )]
+[node name="RoomOuter" parent="Rooms" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 500, 0, 0 )
 
-[node name="Sign" parent="Rooms/RoomInner" instance=ExtResource( 5 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -10, 0 )
-displayed_text = "Inner Room"
-
-[node name="RoomOuter" type="Spatial" parent="Rooms"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 0 )
-
-[node name="Walls" parent="Rooms/RoomOuter" instance=ExtResource( 1 )]
-
-[node name="Sign" parent="Rooms/RoomOuter" instance=ExtResource( 5 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -10, 0 )
-displayed_text = "Outer Room"
-
-[node name="RoomLeft" type="Spatial" parent="Rooms"]
+[node name="RoomLeft" parent="Rooms" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0 )
 
-[node name="Walls" parent="Rooms/RoomLeft" instance=ExtResource( 1 )]
-
-[node name="Sign" parent="Rooms/RoomLeft" instance=ExtResource( 5 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -10, 0 )
-displayed_text = "Left Room"
-
-[node name="RoomRight" type="Spatial" parent="Rooms"]
+[node name="RoomRight" parent="Rooms" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0 )
 
-[node name="Walls" parent="Rooms/RoomRight" instance=ExtResource( 1 )]
-
-[node name="Sign" parent="Rooms/RoomRight" instance=ExtResource( 5 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -10, 0 )
-displayed_text = "Right Room"
-
-[node name="RoomTop" type="Spatial" parent="Rooms"]
+[node name="RoomTop" parent="Rooms" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0 )
 
-[node name="Walls" parent="Rooms/RoomTop" instance=ExtResource( 1 )]
-
-[node name="Sign" parent="Rooms/RoomTop" instance=ExtResource( 5 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -10, 0 )
-displayed_text = "Top Room"
-
-[node name="RoomBottom" type="Spatial" parent="Rooms"]
+[node name="RoomBottom" parent="Rooms" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0 )
 
-[node name="Walls" parent="Rooms/RoomBottom" instance=ExtResource( 1 )]
-
-[node name="Sign" parent="Rooms/RoomBottom" instance=ExtResource( 5 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -10, 0 )
-displayed_text = "Bottom Room"
-
-[node name="RoomFront" type="Spatial" parent="Rooms"]
+[node name="RoomFront" parent="Rooms" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20 )
 
-[node name="Walls" parent="Rooms/RoomFront" instance=ExtResource( 1 )]
-
-[node name="Sign" parent="Rooms/RoomFront" instance=ExtResource( 5 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -10, 0 )
-displayed_text = "Front Room"
-
-[node name="RoomBack" type="Spatial" parent="Rooms"]
+[node name="RoomBack" parent="Rooms" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20 )
-
-[node name="Walls" parent="Rooms/RoomBack" instance=ExtResource( 1 )]
-
-[node name="Sign" parent="Rooms/RoomBack" instance=ExtResource( 5 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -10, 0 )
-displayed_text = "Back Room"
 
 [node name="Tracker" type="Spatial" parent="."]
 script = ExtResource( 4 )
@@ -131,4 +89,3 @@ shape = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, -8, 5 )
-is_gravity_disabled = true
