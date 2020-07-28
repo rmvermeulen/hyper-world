@@ -103,6 +103,11 @@ func _on_player_changed_room(new_room_tag: String):
 		"right":
 			_rotate_tesseract_left()
 
+	# hide outer room, show others
+	for room in $Rooms.get_children():
+		var d: int = room.transform.origin.distance_squared_to(SLOT_OUTER)
+		room.set("visible", d != 0)
+
 	# move player to wrapped position
 	var extent = .5 * ROOM_SIZE
 	var pos: Vector3 = $Player.transform.origin
@@ -114,7 +119,7 @@ func _on_player_changed_room(new_room_tag: String):
 	# done
 	prints("done")
 
-	
+
 # helper methods
 func _room_at(pos: Vector3) -> Spatial:
 	var room = null
@@ -125,7 +130,9 @@ func _room_at(pos: Vector3) -> Spatial:
 	assert(room)
 	return room
 
+
 # tesseract rotation methods
+
 
 func _rotate_tesseract_up() -> void:
 	var inner := _room_at(SLOT_INNER)
@@ -251,7 +258,5 @@ func _rotate_tesseract_backward() -> void:
 	_room_at(SLOT_TOP).transform *= data.pitch_down
 	# bottom -> pitch up
 	_room_at(SLOT_BOTTOM).transform *= data.pitch_up
-
-
 
 # end
