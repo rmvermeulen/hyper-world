@@ -8,7 +8,7 @@ var db: DB
 func _ready():
 	db = DB.new()
 	assert(db)
-	db.path = "game.db"
+	db.path = "resources/game.db"
 	assert(db.open_db())
 #	db.drop_table("rooms")
 	db.create_table(
