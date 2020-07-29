@@ -1,4 +1,4 @@
-extends "res://scenes/tesseract-fps/BaseRoom.gd"
+extends "res://scenes/tesseract-fps/rooms/BaseRoom.gd"
 
 
 func _ready():
