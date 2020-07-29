@@ -1,13 +1,60 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/tesseract-fps/rooms/RoomInner.gd" type="Script" id=1]
-[ext_resource path="res://scenes/tesseract-fps/HallwayRoomExample.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/ShellOuterMat.tres" type="Material" id=2]
 [ext_resource path="res://components/Sign.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/tesseract-fps/WallBlock.tscn" type="PackedScene" id=4]
 
 [node name="RoomInner" type="Spatial"]
 script = ExtResource( 1 )
 
-[node name="Walls" parent="." instance=ExtResource( 2 )]
+[node name="Walls" type="Spatial" parent="."]
+
+[node name="Back" type="Spatial" parent="Walls"]
+
+[node name="Wall1Door" type="CSGPolygon" parent="Walls/Back"]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, -10 )
+use_collision = true
+polygon = PoolVector2Array( 0, -5, 3, -6, 3, -10, 10, -10, 10, 10, -10, 10, -10, -10, -3, -10, -3, -6 )
+depth = 0.25
+material = ExtResource( 2 )
+
+[node name="Front" type="Spatial" parent="Walls"]
+
+[node name="Wall1Door" type="CSGPolygon" parent="Walls/Front"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+use_collision = true
+polygon = PoolVector2Array( 0, -5, 3, -6, 3, -10, 10, -10, 10, 10, -10, 10, -10, -10, -3, -10, -3, -6 )
+depth = 0.5
+material = ExtResource( 2 )
+
+[node name="Top" type="Spatial" parent="Walls"]
+
+[node name="WallBlock" parent="Walls/Top" instance=ExtResource( 4 )]
+transform = Transform( -6.51683e-07, 0, 10, 0, 0.1, 0, -4, 0, -1.62921e-06, 0, 9.95, 0 )
+
+[node name="Bottom" type="Spatial" parent="Walls"]
+
+[node name="WallBlock" parent="Walls/Bottom" instance=ExtResource( 4 )]
+transform = Transform( 4, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, -9.95, 0 )
+
+[node name="Left" type="Spatial" parent="Walls"]
+
+[node name="WallHoles" type="CSGPolygon" parent="Walls/Left"]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -10, 0, 0 )
+use_collision = true
+polygon = PoolVector2Array( 3.80553, 4.59328, 6.47335, -1.17665, 6, -6, 3, -10, 10, -10, 10, 10, -10, 10, -10, -10, -7, -10, -6.83812, -8.75487, -7.40797, -5.38761, -8.13322, 5.3358, -5.85384, 8.02961, -2.79805, 5.5961, -2, 1, -2.57598, -2.97571, -1.86537, -4.97431, -1.15475, -7.59471, 1.98228, -5.81621, 2.96414, -2.88598, 2.43879, 2.87965 )
+depth = 0.5
+material = ExtResource( 2 )
+
+[node name="Right" type="Spatial" parent="Walls"]
+
+[node name="WallHoles" type="CSGPolygon" parent="Walls/Right"]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 10, 0, 0 )
+use_collision = true
+polygon = PoolVector2Array( 0, -5, 4.64063, 4.88249, 6, -6, 3, -10, 10, -10, 10, 10, -10, 10, -10, -10, -7, -10, -6.27964, 3.25593 )
+depth = 0.5
+material = ExtResource( 2 )
 
 [node name="Sign" parent="." instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -10, 0 )
