@@ -22,25 +22,17 @@ func _ready():
 	assert(OK == $Tracker.connect("changed_room", self, "_on_player_changed_room"))
 
 	# check tracker size and alignment
-	var inner = $Tracker/Inner
-	assert(inner.transform.origin == SLOT_INNER)
-	var front = $Tracker/Front
-	assert(front.transform.origin == SLOT_FRONT)
-	var back = $Tracker/Back
-	assert(back.transform.origin == SLOT_BACK)
-	var left = $Tracker/Left
-	assert(left.transform.origin == SLOT_LEFT)
-	var right = $Tracker/Right
-	assert(right.transform.origin == SLOT_RIGHT)
-	var top = $Tracker/Top
-	assert(top.transform.origin == SLOT_TOP)
-	var bottom = $Tracker/Bottom
-	assert(bottom.transform.origin == SLOT_BOTTOM)
+	$Tracker/Inner.transform.origin = SLOT_INNER
+	$Tracker/Front.transform.origin = SLOT_FRONT
+	$Tracker/Back.transform.origin = SLOT_BACK
+	$Tracker/Top.transform.origin = SLOT_TOP
+	$Tracker/Bottom.transform.origin = SLOT_BOTTOM
+	$Tracker/Left.transform.origin = SLOT_LEFT
+	$Tracker/Right.transform.origin = SLOT_RIGHT
 
 	var room_quadrant := 0.5 * ROOM_SIZE * Vector3(1, 1, 1)
 	for node in $Tracker.get_children():
-		# node.shape.extents = room_quadrant
-		assert(node.shape.extents == room_quadrant)
+		node.get_child(0).shape.extents = room_quadrant
 
 
 func _on_player_changed_room(new_room_tag: String):
