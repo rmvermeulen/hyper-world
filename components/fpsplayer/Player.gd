@@ -36,6 +36,9 @@ func _physics_process(delta):
 	_process_input(delta)
 	_process_movement(delta)
 
+	if Input.is_key_pressed(KEY_Y):
+		assert(OK == get_tree().reload_current_scene())
+
 
 func _process_input(delta):
 	var cam_input = Vector2()
