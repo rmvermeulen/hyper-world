@@ -34,6 +34,8 @@ func _ready():
 	for node in $Tracker.get_children():
 		node.get_child(0).shape.extents = room_quadrant
 
+	_on_player_changed_room("front")
+
 
 func _on_player_changed_room(new_room_tag: String):
 	if new_room_tag == "inner":

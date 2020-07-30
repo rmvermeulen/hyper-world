@@ -14,14 +14,14 @@ const SLOT_RIGHT := Vector3.RIGHT * ROOM_SIZE
 const SLOT_FRONT := Vector3.BACK * ROOM_SIZE
 const SLOT_BACK := Vector3.FORWARD * ROOM_SIZE
 
-export (PackedScene) var _scene_inner := load("./rooms/RoomInner.tscn") setget _set_scene_inner
-export (PackedScene) var _scene_outer := load("./rooms/RoomOuter.tscn") setget _set_scene_outer
-export (PackedScene) var _scene_top := load("./rooms/RoomTop.tscn") setget _set_scene_top
-export (PackedScene) var _scene_bottom := load("./rooms/RoomBottom.tscn") setget _set_scene_bottom
-export (PackedScene) var _scene_left := load("./rooms/RoomLeft.tscn") setget _set_scene_left
-export (PackedScene) var _scene_right := load("./rooms/RoomRight.tscn") setget _set_scene_right
-export (PackedScene) var _scene_front := load("./rooms/RoomFront.tscn") setget _set_scene_front
-export (PackedScene) var _scene_back := load("./rooms/RoomBack.tscn") setget _set_scene_back
+export var _scene_inner := preload("./rooms/RoomInner.tscn") setget _set_scene_inner
+export var _scene_outer := preload("./rooms/RoomOuter.tscn") setget _set_scene_outer
+export var _scene_top := preload("./rooms/RoomTop.tscn") setget _set_scene_top
+export var _scene_bottom := preload("./rooms/RoomBottom.tscn") setget _set_scene_bottom
+export var _scene_left := preload("./rooms/RoomLeft.tscn") setget _set_scene_left
+export var _scene_right := preload("./rooms/RoomRight.tscn") setget _set_scene_right
+export var _scene_front := preload("./rooms/RoomFront.tscn") setget _set_scene_front
+export var _scene_back := preload("./rooms/RoomBack.tscn") setget _set_scene_back
 
 var data = TData.new()
 var _rooms_dirty := true
@@ -30,14 +30,15 @@ var _rooms_dirty := true
 
 
 func _ready():
-	_instantiate_rooms()
+	if _instantiate_rooms():
+		_rooms_dirty = false
 
 
 func _physics_process(_delta):
 	if not _rooms_dirty:
 		return
-	_instantiate_rooms()
-	_rooms_dirty = false
+	if _instantiate_rooms():
+		_rooms_dirty = false
 
 
 func _set_scene_inner(value):
@@ -80,7 +81,7 @@ func _set_scene_back(value):
 	_rooms_dirty = true
 
 
-func _instantiate_rooms():
+func _instantiate_rooms() -> bool:
 	# for now just a dumb replace-all
 
 	# remove existing rooms
@@ -102,6 +103,7 @@ func _instantiate_rooms():
 		var room = scene[0].instance()
 		room.set_indexed(":transform:origin", scene[1])
 		add_child(room)
+	return true
 
 
 func _room_at(pos: Vector3) -> Spatial:

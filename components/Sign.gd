@@ -28,6 +28,8 @@ func _physics_process(delta) -> void:
 
 	if not _player_node:
 		_player_node = _get_player()
+	if not _player_node:
+		return
 
 	var my_pos := global_transform.origin
 	var p_pos := _player_node.global_transform.origin

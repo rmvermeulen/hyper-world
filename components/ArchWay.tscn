@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/wallArchTopDetail.glb" type="PackedScene" id=1]
+[ext_resource path="res://assets/wallArch.glb" type="PackedScene" id=2]
+
+[node name="ArchWay" type="Spatial"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -9, -10, -1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="wallArchTopDetail" type="Spatial" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="wallArchTopDetail2" type="Spatial" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 2, 1 )
+
+[node name="wallArch" type="Spatial" parent="." instance=ExtResource( 2 )]
+
+[node name="wallArch2" type="Spatial" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[node name="wallArch3" type="Spatial" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 1 )
+
+[node name="wallArch4" type="Spatial" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 1, 1 )
