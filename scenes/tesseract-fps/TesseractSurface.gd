@@ -14,14 +14,22 @@ const SLOT_RIGHT := Vector3.RIGHT * ROOM_SIZE
 const SLOT_FRONT := Vector3.BACK * ROOM_SIZE
 const SLOT_BACK := Vector3.FORWARD * ROOM_SIZE
 
-export var _scene_inner := preload("./rooms/RoomInner.tscn") setget _set_scene_inner
-export var _scene_outer := preload("./rooms/RoomOuter.tscn") setget _set_scene_outer
-export var _scene_top := preload("./rooms/RoomTop.tscn") setget _set_scene_top
-export var _scene_bottom := preload("./rooms/RoomBottom.tscn") setget _set_scene_bottom
-export var _scene_left := preload("./rooms/RoomLeft.tscn") setget _set_scene_left
-export var _scene_right := preload("./rooms/RoomRight.tscn") setget _set_scene_right
-export var _scene_front := preload("./rooms/RoomFront.tscn") setget _set_scene_front
-export var _scene_back := preload("./rooms/RoomBack.tscn") setget _set_scene_back
+export (PackedScene) var _scene_inner: PackedScene =\
+	preload("./rooms/RoomInner.tscn") setget _set_scene_inner
+export (PackedScene) var _scene_outer: PackedScene =\
+	preload("./rooms/RoomOuter.tscn") setget _set_scene_outer
+export (PackedScene) var _scene_top: PackedScene =\
+	preload("./rooms/RoomTop.tscn") setget _set_scene_top
+export (PackedScene) var _scene_bottom: PackedScene =\
+	preload("./rooms/RoomBottom.tscn") setget _set_scene_bottom
+export (PackedScene) var _scene_left: PackedScene =\
+	preload("./rooms/RoomLeft.tscn") setget _set_scene_left
+export (PackedScene) var _scene_right: PackedScene =\
+	preload("./rooms/RoomRight.tscn") setget _set_scene_right
+export (PackedScene) var _scene_front: PackedScene =\
+	preload("./rooms/RoomFront.tscn") setget _set_scene_front
+export (PackedScene) var _scene_back: PackedScene =\
+	preload("./rooms/RoomBack.tscn") setget _set_scene_back
 
 var data = TData.new()
 var _rooms_dirty := true
