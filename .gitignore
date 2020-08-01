@@ -3,3 +3,5 @@
 .import/
 logs/
 node_modules/
+# ignore imports in distribution folder
+dist/**/*.import
