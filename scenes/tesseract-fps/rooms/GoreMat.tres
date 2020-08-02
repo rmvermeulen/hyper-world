@@ -1,0 +1,31 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://assets/red.jpg" type="Texture" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type spatial;
+
+uniform float time_scale = 0.1;
+uniform float x_scale = 0.2;
+uniform float y_scale = 0.15;
+uniform sampler2D gore_tex: hint_albedo; 
+
+void fragment() {
+	float t = time_scale * TIME;
+	float ct = x_scale * cos(t);
+	float st = y_scale * sin(t);
+	vec3 c1 = texture(gore_tex, vec2(
+		t * ct - UV.x,
+		t * st - UV.y)).rgb;
+	vec3 c2 = texture(gore_tex, vec2(
+		t * ct + UV.x,
+		UV.y - t * st)).rgb;
+	ALBEDO = mix(c1, c2, cos(TIME * 0.8));
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/time_scale = 0.1
+shader_param/x_scale = 0.02
+shader_param/y_scale = 0.015
+shader_param/gore_tex = ExtResource( 1 )
