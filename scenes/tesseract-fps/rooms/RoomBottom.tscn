@@ -1,14 +1,146 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/tesseract-fps/rooms/RoomBottom.gd" type="Script" id=1]
-[ext_resource path="res://scenes/tesseract-fps/HallwayRoomExample.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/ShellOuterMat.tres" type="Material" id=2]
 [ext_resource path="res://components/Sign.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/red.jpg" type="Texture" id=4]
+[ext_resource path="res://scenes/tesseract-fps/WallBlock.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : hint_color;
+uniform sampler2D texture_albedo : hint_albedo;
+uniform float specular;
+uniform float metallic;
+uniform float roughness : hint_range(0,1);
+uniform float point_size : hint_range(0,128);
+varying vec3 uv1_triplanar_pos;
+uniform float uv1_blend_sharpness;
+varying vec3 uv1_power_normal;
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+uniform float wiggle_radius: hint_range(0, 1) = 0.5;
+
+void vertex() {
+	TANGENT = vec3(0.0,0.0,-1.0) * abs(NORMAL.x);
+	TANGENT+= vec3(1.0,0.0,0.0) * abs(NORMAL.y);
+	TANGENT+= vec3(1.0,0.0,0.0) * abs(NORMAL.z);
+	TANGENT = normalize(TANGENT);
+	BINORMAL = vec3(0.0,-1.0,0.0) * abs(NORMAL.x);
+	BINORMAL+= vec3(0.0,0.0,1.0) * abs(NORMAL.y);
+	BINORMAL+= vec3(0.0,-1.0,0.0) * abs(NORMAL.z);
+	BINORMAL = normalize(BINORMAL);
+	uv1_power_normal=pow(abs(NORMAL),vec3(uv1_blend_sharpness));
+	uv1_power_normal/=dot(uv1_power_normal,vec3(1.0));
+	uv1_triplanar_pos = VERTEX * uv1_scale + uv1_offset;
+	uv1_triplanar_pos *= vec3(1.0,-1.0, 1.0);
+	
+	
+	float ct = 0.5 * (0.5 + cos(TIME + VERTEX.y));
+	float st = 0.5 * (0.5 + sin(TIME + VERTEX.x));
+	VERTEX += vec3(ct, st, max(ct, st)) * wiggle_radius;
+}
+
+
+vec4 triplanar_texture(sampler2D p_sampler,vec3 p_weights,vec3 p_triplanar_pos) {
+	vec4 samp=vec4(0.0);
+	samp+= texture(p_sampler,p_triplanar_pos.xy) * p_weights.z;
+	samp+= texture(p_sampler,p_triplanar_pos.xz) * p_weights.y;
+	samp+= texture(p_sampler,p_triplanar_pos.zy * vec2(-1.0,1.0)) * p_weights.x;
+	return samp;
+}
+
+
+void fragment() {
+	vec4 albedo_tex = triplanar_texture(texture_albedo,uv1_power_normal,uv1_triplanar_pos);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	METALLIC = metallic;
+	ROUGHNESS = roughness;
+	SPECULAR = specular;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/uv1_blend_sharpness = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/wiggle_radius = 0.5
+shader_param/texture_albedo = ExtResource( 4 )
+
+[sub_resource type="CylinderMesh" id=3]
+material = SubResource( 2 )
+height = 25.0
+radial_segments = 32
+rings = 48
 
 [node name="RoomBottom" type="Spatial"]
 script = ExtResource( 1 )
 
-[node name="Walls" parent="." instance=ExtResource( 2 )]
+[node name="Walls" type="Spatial" parent="."]
+
+[node name="Back" type="Spatial" parent="Walls"]
+
+[node name="Wall1Door" type="CSGPolygon" parent="Walls/Back"]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, -10 )
+use_collision = true
+polygon = PoolVector2Array( 0, -5, 3, -6, 3, -10, 10, -10, 10, 10, -10, 10, -10, -10, -3, -10, -3, -6 )
+depth = 0.25
+material = ExtResource( 2 )
+
+[node name="Front" type="Spatial" parent="Walls"]
+
+[node name="Wall1Door" type="CSGPolygon" parent="Walls/Front"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+use_collision = true
+polygon = PoolVector2Array( 0, -5, 3, -6, 3, -10, 10, -10, 10, 10, -10, 10, -10, -10, -3, -10, -3, -6 )
+depth = 0.5
+material = ExtResource( 2 )
+
+[node name="Top" type="Spatial" parent="Walls"]
+
+[node name="WallBlock" parent="Walls/Top" instance=ExtResource( 5 )]
+transform = Transform( -6.51683e-07, 0, 10, 0, 0.1, 0, -4, 0, -1.62921e-06, 0, 9.95, 0 )
+
+[node name="Bottom" type="Spatial" parent="Walls"]
+
+[node name="WallBlock" parent="Walls/Bottom" instance=ExtResource( 5 )]
+transform = Transform( 4, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, -9.95, 0 )
+
+[node name="Left" type="Spatial" parent="Walls"]
+
+[node name="WallHoles" type="CSGPolygon" parent="Walls/Left"]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -10, 0, 0 )
+use_collision = true
+polygon = PoolVector2Array( 0, -5, 4.64063, 4.88249, 6, -6, 3, -10, 10, -10, 10, 10, -10, 10, -10, -10, -7, -10, -6.27964, 3.25593 )
+depth = 0.5
+material = ExtResource( 2 )
+
+[node name="Right" type="Spatial" parent="Walls"]
+
+[node name="WallHoles" type="CSGPolygon" parent="Walls/Right"]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 10, 0, 0 )
+use_collision = true
+polygon = PoolVector2Array( 0, -5, 4.64063, 4.88249, 6, -6, 3, -10, 10, -10, 10, 10, -10, 10, -10, -10, -7, -10, -6.27964, 3.25593 )
+depth = 0.5
+material = ExtResource( 2 )
 
 [node name="Sign" parent="." instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -10, 0 )
 displayed_text = "Bottom Room"
+
+[node name="Tube" type="MeshInstance" parent="."]
+transform = Transform( 0.391438, -0.920205, 0, 0.920205, 0.391438, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = null
