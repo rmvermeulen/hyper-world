@@ -1,0 +1,18 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+void fragment() {
+	float t = 0.1 * TIME;
+	float ct = 0.2 * cos(t);
+	float st = 0.15 * sin(t);
+	vec4 c1 = texture(TEXTURE, vec2(
+		t * ct - UV.x,
+		t * st - UV.y));
+	vec4 c2 = texture(TEXTURE, vec2(
+		t * ct + UV.x,
+		UV.y - t * st));
+	COLOR = mix(c1, c2, cos(TIME * 0.8));
+}"
+custom_defines = ""

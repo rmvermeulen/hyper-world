@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/main-menu/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://resources/AtarianSystem.ttf" type="DynamicFontData" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://scenes/cube-platformer/Platformer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/ui/panel_boltsDetail.png" type="Texture" id=5]
 [ext_resource path="res://scenes/tesseract-fps/HyperWorld.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/red.jpg" type="Texture" id=7]
+[ext_resource path="res://resources/GoreShader.tres" type="Shader" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -16,12 +18,15 @@ font_data = ExtResource( 2 )
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
 
-[sub_resource type="InputEventKey" id=3]
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 8 )
+
+[sub_resource type="InputEventKey" id=4]
 pressed = true
 scancode = 16777217
 
-[sub_resource type="ShortCut" id=4]
-shortcut = SubResource( 3 )
+[sub_resource type="ShortCut" id=5]
+shortcut = SubResource( 4 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -32,6 +37,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 maps = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 6 ) ]
+
+[node name="Background" type="TextureRect" parent="."]
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
@@ -87,7 +102,7 @@ margin_bottom = 195.0
 rect_min_size = Vector2( 250, 50 )
 hint_tooltip = "Exit the game"
 size_flags_vertical = 6
-shortcut = SubResource( 4 )
+shortcut = SubResource( 5 )
 text = "Exit"
 flat = true
 [connection signal="pressed" from="CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/ButtonExit" to="." method="_on_ButtonExit_pressed"]
