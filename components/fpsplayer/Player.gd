@@ -41,6 +41,7 @@ func _physics_process(delta):
 
 
 func _process_input(delta):
+	# todo: remove, or integrate properly
 	var cam_input = Vector2()
 	if Input.is_action_pressed("ui_up"):
 		cam_input.y -= 1
@@ -129,6 +130,18 @@ func _process_movement(delta):
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		_camera_rotation_input(event.relative * MOUSE_SENSITIVITY)
+	if event is InputEventJoypadMotion:
+		match event.axis:
+			# movement
+			JOY_AXIS_0:
+				pass
+			JOY_AXIS_1:
+				pass
+			# look around
+			JOY_AXIS_2:
+				_camera_rotation_input((Vector2.RIGHT * event.axis_value) / MOUSE_SENSITIVITY)
+			JOY_AXIS_3:
+				_camera_rotation_input((Vector2.UP * event.axis_value) / MOUSE_SENSITIVITY)
 
 
 func _camera_rotation_input(move: Vector2) -> void:
