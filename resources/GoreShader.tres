@@ -3,8 +3,10 @@
 [resource]
 code = "shader_type canvas_item;
 
+uniform float time_scale: hint_range(0, 2) = 1;
+
 void fragment() {
-	float t = 0.1 * TIME;
+	float t = 0.1 * time_scale * TIME;
 	float ct = 0.2 * cos(t);
 	float st = 0.15 * sin(t);
 	vec4 c1 = texture(TEXTURE, vec2(
