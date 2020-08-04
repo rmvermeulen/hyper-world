@@ -8,3 +8,11 @@ BUTTON_SAVE_LOAD,Save/Load,Opslaan/Laden
 BUTTON_EXIT,Exit,Afsluiten
 BUTTON_BACK,Back,Terug
 LABEL_LANGUAGE,Language,Taal
+SIGN_ROOM_INNER,This is the inner room,Dit is de binnenste kamer
+SIGN_ROOM_OUTER,This is the outer room,Dit is de buitenste kamer
+SIGN_ROOM_LEFT,This is the left room,Dit is de linker kamer
+SIGN_ROOM_RIGHT,This is the right room,Dit is de rechter kamer
+SIGN_ROOM_FRONT,This is the front room,Dit is de voorste kamer
+SIGN_ROOM_BACK,This is the back room,Dit is de achterste kamer
+SIGN_ROOM_TOP,This is the top room,Dit is de bovenste kamer
+SIGN_ROOM_BOTTOM,This is the bottom room,Dit is de onderste kamer

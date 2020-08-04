@@ -16,7 +16,7 @@ func _ready():
 
 
 func set_displayed_text(value: String) -> void:
-	displayed_text = value
+	displayed_text = tr(value.strip_edges())
 	if name:
 		find_node("Label").text = displayed_text
 		find_node("Viewport").render_target_update_mode = Viewport.UPDATE_ONCE

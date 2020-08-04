@@ -138,7 +138,7 @@ material = ExtResource( 2 )
 
 [node name="Sign" parent="." instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -10, 0 )
-displayed_text = "Bottom Room"
+displayed_text = "SIGN_ROOM_BOTTOM"
 
 [node name="Tube" type="MeshInstance" parent="."]
 transform = Transform( 0.391438, -0.920205, 0, 0.920205, 0.391438, 0, 0, 0, 1, 0, 0, 0 )

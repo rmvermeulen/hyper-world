@@ -8,6 +8,8 @@ var _player_node = null
 
 func setup_material():
 	var shader_mat: ShaderMaterial = material
+	if not name:
+		return
 	shader_mat.set_shader_param("vp_texture", $Viewport.get_texture())
 	yield(get_tree(), "idle_frame")
 	shader_mat.set_shader_param("vp_texture", $Viewport.get_texture())

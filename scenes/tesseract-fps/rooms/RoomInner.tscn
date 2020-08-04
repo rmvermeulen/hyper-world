@@ -62,4 +62,4 @@ material = ExtResource( 2 )
 
 [node name="Sign" parent="." instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -10, 0 )
-displayed_text = "Inner Room"
+displayed_text = "SIGN_ROOM_INNER"

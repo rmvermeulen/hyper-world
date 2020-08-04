@@ -9,7 +9,6 @@
 [ext_resource path="res://scenes/tesseract-fps/rooms/SeeThroughSurface.gd" type="Script" id=7]
 [ext_resource path="res://components/GalaxyScene.tscn" type="PackedScene" id=8]
 
-
 [sub_resource type="QuadMesh" id=1]
 size = Vector2( 20, 20 )
 
@@ -87,4 +86,4 @@ material = ExtResource( 4 )
 
 [node name="Sign" parent="." instance=ExtResource( 3 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -10, 0 )
-displayed_text = "Front Room"
+displayed_text = "SIGN_ROOM_FRONT"
