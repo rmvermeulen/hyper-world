@@ -87,6 +87,11 @@ look_right={
  ]
 }
 
+[locale]
+
+translations=PoolStringArray( "res://i18n/translations.en.translation", "res://i18n/translations.nl.translation" )
+locale_filter=[ 1, [ "en", "nl" ] ]
+
 [rendering]
 
 quality/2d/use_pixel_snap=true

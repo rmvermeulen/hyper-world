@@ -5,3 +5,5 @@ logs/
 node_modules/
 # ignore imports in distribution folder
 dist/**/*.import
+# ignore libre-office calc artifacts
+.~lock*

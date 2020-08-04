@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="InputEventKey" id=1]
+pressed = true
+scancode = 16777217
+
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
+
+[node name="Back" type="Button"]
+margin_right = 12.0
+margin_bottom = 39.0
+shortcut = SubResource( 2 )
+text = "Back"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

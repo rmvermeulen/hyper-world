@@ -1,8 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/main-menu/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://resources/AtarianSystem.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://assets/ui/panel_boltsDetail.png" type="Texture" id=5]
+[ext_resource path="res://scenes/main-menu/MetalPanel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/main-menu/BackButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/main-menu/Header.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/red.jpg" type="Texture" id=7]
 [ext_resource path="res://resources/GoreShader.tres" type="Shader" id=8]
 
@@ -42,6 +44,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+options_language = "nl"
 
 [node name="Background" type="TextureRect" parent="."]
 material = SubResource( 3 )
@@ -60,24 +63,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer"]
+[node name="MetalPanel" parent="CenterContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 302.0
 margin_top = 90.0
 margin_right = 722.0
 margin_bottom = 510.0
-rect_min_size = Vector2( 420, 420 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 5 )
-patch_margin_left = 32
-patch_margin_top = 32
-patch_margin_right = 32
-patch_margin_bottom = 32
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/NinePatchRect"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/MetalPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 2
@@ -90,7 +84,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TabContainer" type="TabContainer" parent="CenterContainer/NinePatchRect/MarginContainer"]
+[node name="TabContainer" type="TabContainer" parent="CenterContainer/MetalPanel/MarginContainer"]
 margin_left = 40.0
 margin_top = 40.0
 margin_right = 380.0
@@ -99,75 +93,127 @@ custom_styles/tab_fg = SubResource( 4 )
 custom_styles/tab_disabled = SubResource( 5 )
 custom_styles/tab_bg = SubResource( 6 )
 custom_styles/panel = SubResource( 7 )
+tabs_visible = false
 
-[node name="Main Menu" type="VBoxContainer" parent="CenterContainer/NinePatchRect/MarginContainer/TabContainer"]
+[node name="MainMenu" type="VBoxContainer" parent="CenterContainer/MetalPanel/MarginContainer/TabContainer"]
 use_parent_material = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 33.0
 custom_constants/separation = 16
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonStart" type="Button" parent="CenterContainer/NinePatchRect/MarginContainer/TabContainer/Main Menu"]
-use_parent_material = true
-margin_top = 7.0
+[node name="Header" parent="CenterContainer/MetalPanel/MarginContainer/TabContainer/MainMenu" instance=ExtResource( 5 )]
 margin_right = 340.0
-margin_bottom = 57.0
+text = "HEADER_MAIN_MENU"
+
+[node name="Start" type="Button" parent="CenterContainer/MetalPanel/MarginContainer/TabContainer/MainMenu"]
+use_parent_material = true
+margin_top = 61.0
+margin_right = 340.0
+margin_bottom = 111.0
 rect_min_size = Vector2( 250, 50 )
 hint_tooltip = "Exit the game"
 size_flags_vertical = 6
 shortcut = SubResource( 9 )
-text = "Start"
+text = "BUTTON_START"
 flat = true
 
-[node name="ButtonSave" type="Button" parent="CenterContainer/NinePatchRect/MarginContainer/TabContainer/Main Menu"]
+[node name="Options" type="Button" parent="CenterContainer/MetalPanel/MarginContainer/TabContainer/MainMenu"]
 use_parent_material = true
-margin_top = 87.0
+margin_top = 135.0
 margin_right = 340.0
-margin_bottom = 137.0
+margin_bottom = 185.0
 rect_min_size = Vector2( 250, 50 )
 hint_tooltip = "Exit the game"
 size_flags_vertical = 6
 shortcut = SubResource( 9 )
-text = "Save"
+text = "BUTTON_OPTIONS"
 flat = true
 
-[node name="ButtonLoad" type="Button" parent="CenterContainer/NinePatchRect/MarginContainer/TabContainer/Main Menu"]
+[node name="Save" type="Button" parent="CenterContainer/MetalPanel/MarginContainer/TabContainer/MainMenu"]
 use_parent_material = true
-margin_top = 167.0
+margin_top = 209.0
 margin_right = 340.0
-margin_bottom = 217.0
+margin_bottom = 259.0
 rect_min_size = Vector2( 250, 50 )
 hint_tooltip = "Exit the game"
 size_flags_vertical = 6
 shortcut = SubResource( 9 )
-text = "Load"
+text = "BUTTON_SAVE_LOAD"
 flat = true
 
-[node name="ButtonExit" type="Button" parent="CenterContainer/NinePatchRect/MarginContainer/TabContainer/Main Menu"]
+[node name="Exit" type="Button" parent="CenterContainer/MetalPanel/MarginContainer/TabContainer/MainMenu"]
 use_parent_material = true
-margin_top = 248.0
+margin_top = 284.0
 margin_right = 340.0
-margin_bottom = 298.0
+margin_bottom = 334.0
 rect_min_size = Vector2( 250, 50 )
 hint_tooltip = "Exit the game"
 size_flags_vertical = 6
 shortcut = SubResource( 9 )
-text = "Exit"
+text = "BUTTON_EXIT"
 flat = true
 
-[node name="Options" type="VBoxContainer" parent="CenterContainer/NinePatchRect/MarginContainer/TabContainer"]
+[node name="Options" type="VBoxContainer" parent="CenterContainer/MetalPanel/MarginContainer/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 33.0
 custom_constants/separation = 16
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="CenterContainer/NinePatchRect/MarginContainer/TabContainer/Main Menu/ButtonStart" to="." method="_on_ButtonStart_pressed"]
-[connection signal="pressed" from="CenterContainer/NinePatchRect/MarginContainer/TabContainer/Main Menu/ButtonSave" to="." method="_on_ButtonSave_pressed"]
-[connection signal="pressed" from="CenterContainer/NinePatchRect/MarginContainer/TabContainer/Main Menu/ButtonLoad" to="." method="_on_ButtonLoad_pressed"]
-[connection signal="pressed" from="CenterContainer/NinePatchRect/MarginContainer/TabContainer/Main Menu/ButtonExit" to="." method="_on_ButtonExit_pressed"]
+
+[node name="Header" parent="CenterContainer/MetalPanel/MarginContainer/TabContainer/Options" instance=ExtResource( 5 )]
+margin_right = 340.0
+text = "HEADER_OPTIONS"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MetalPanel/MarginContainer/TabContainer/Options"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="CenterContainer/MetalPanel/MarginContainer/TabContainer/Options/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 33.0
+text = "LABEL_LANGUAGE"
+
+[node name="Languages" type="OptionButton" parent="CenterContainer/MetalPanel/MarginContainer/TabContainer/Options/HBoxContainer"]
+margin_right = 29.0
+margin_bottom = 39.0
+text = "English"
+flat = true
+items = [ "English", null, false, 0, null, "Nederlands", null, false, 1, null ]
+selected = 0
+
+[node name="Back" parent="CenterContainer/MetalPanel/MarginContainer/TabContainer/Options" instance=ExtResource( 4 )]
+margin_top = 57.0
+margin_right = 340.0
+margin_bottom = 96.0
+text = "BUTTON_BACK"
+
+[node name="SaveLoad" type="VBoxContainer" parent="CenterContainer/MetalPanel/MarginContainer/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" parent="CenterContainer/MetalPanel/MarginContainer/TabContainer/SaveLoad" instance=ExtResource( 5 )]
+margin_right = 340.0
+text = "HEADER_SAVE_LOAD"
+
+[node name="Back" parent="CenterContainer/MetalPanel/MarginContainer/TabContainer/SaveLoad" instance=ExtResource( 4 )]
+margin_top = 57.0
+margin_right = 340.0
+margin_bottom = 96.0
+text = "BUTTON_BACK"
+[connection signal="pressed" from="CenterContainer/MetalPanel/MarginContainer/TabContainer/MainMenu/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="CenterContainer/MetalPanel/MarginContainer/TabContainer/MainMenu/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="CenterContainer/MetalPanel/MarginContainer/TabContainer/MainMenu/Save" to="." method="_on_SaveLoad_pressed"]
+[connection signal="pressed" from="CenterContainer/MetalPanel/MarginContainer/TabContainer/MainMenu/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="item_selected" from="CenterContainer/MetalPanel/MarginContainer/TabContainer/Options/HBoxContainer/Languages" to="." method="_on_Languages_item_selected"]
+[connection signal="pressed" from="CenterContainer/MetalPanel/MarginContainer/TabContainer/Options/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="CenterContainer/MetalPanel/MarginContainer/TabContainer/SaveLoad/Back" to="." method="_on_Back_pressed"]
