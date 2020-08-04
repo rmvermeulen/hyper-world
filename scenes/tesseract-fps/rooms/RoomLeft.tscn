@@ -1,13 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/tesseract-fps/rooms/RoomLeft.gd" type="Script" id=1]
 [ext_resource path="res://resources/ShellOuterMat.tres" type="Material" id=2]
 [ext_resource path="res://components/Sign.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/tesseract-fps/WallBlock.tscn" type="PackedScene" id=4]
 [ext_resource path="res://components/ArchWay.tscn" type="PackedScene" id=5]
+[ext_resource path="res://components/RoomEdges.tscn" type="PackedScene" id=6]
 
 [node name="RoomLeft" type="Spatial"]
 script = ExtResource( 1 )
+
+[node name="RoomEdges" parent="." instance=ExtResource( 6 )]
 
 [node name="Walls" type="Spatial" parent="."]
 

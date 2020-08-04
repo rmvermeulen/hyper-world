@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/tesseract-fps/rooms/RoomFront.gd" type="Script" id=1]
 [ext_resource path="res://scenes/tesseract-fps/WallBlock.tscn" type="PackedScene" id=2]
@@ -8,12 +8,15 @@
 [ext_resource path="res://resources/RoomFrontPortalMat.tres" type="Material" id=6]
 [ext_resource path="res://scenes/tesseract-fps/rooms/SeeThroughSurface.gd" type="Script" id=7]
 [ext_resource path="res://components/GalaxyScene.tscn" type="PackedScene" id=8]
+[ext_resource path="res://components/RoomEdges.tscn" type="PackedScene" id=9]
 
 [sub_resource type="QuadMesh" id=1]
 size = Vector2( 20, 20 )
 
 [node name="RoomFront" type="Spatial"]
 script = ExtResource( 1 )
+
+[node name="RoomEdges" parent="." instance=ExtResource( 9 )]
 
 [node name="Walls" type="Spatial" parent="."]
 

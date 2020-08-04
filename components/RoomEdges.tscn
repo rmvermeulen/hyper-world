@@ -1,0 +1,25 @@
+[gd_scene format=2]
+
+[node name="RoomEdges" type="CSGBox"]
+use_collision = true
+width = 20.0
+height = 20.0
+depth = 20.0
+
+[node name="Hollow" type="CSGBox" parent="."]
+operation = 2
+width = 21.0
+height = 19.0
+depth = 19.0
+
+[node name="Hollow2" type="CSGBox" parent="."]
+operation = 2
+width = 19.0
+height = 21.0
+depth = 19.0
+
+[node name="Hollow3" type="CSGBox" parent="."]
+operation = 2
+width = 19.0
+height = 19.0
+depth = 21.0
