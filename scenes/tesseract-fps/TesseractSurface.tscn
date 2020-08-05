@@ -1,14 +1,15 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://scenes/tesseract-fps/rooms/RoomLeft.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/tesseract-fps/rooms/RoomOuter.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/tesseract-fps/rooms/RoomInner.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/tesseract-fps/rooms/RoomBottom.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/tesseract-fps/rooms/RoomTop.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/tesseract-fps/rooms/RoomRight.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/tesseract-fps/level1/RoomLeft.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/tesseract-fps/level1/RoomOuter.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/tesseract-fps/level1/RoomInner.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/tesseract-fps/level1/RoomBottom.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/tesseract-fps/level1/RoomTop.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/tesseract-fps/level1/RoomRight.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/tesseract-fps/TesseractSurface.gd" type="Script" id=15]
-[ext_resource path="res://scenes/tesseract-fps/rooms/RoomFront.tscn" type="PackedScene" id=16]
-[ext_resource path="res://scenes/tesseract-fps/rooms/RoomBack.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scenes/tesseract-fps/level1/RoomFront.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/tesseract-fps/level1/RoomBack.tscn" type="PackedScene" id=17]
+
 
 [node name="TesseractSurface" type="Spatial"]
 script = ExtResource( 15 )
