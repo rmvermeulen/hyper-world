@@ -1,0 +1,31 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/tesseract-fps/level1/RoomInner.gd" type="Script" id=1]
+[ext_resource path="res://scenes/tesseract-fps/level1/RoomOuter.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/tesseract-fps/level1/RoomOuter.gd" type="Script" id=3]
+[ext_resource path="res://scenes/tesseract-fps/level1/RoomTop.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/tesseract-fps/level1/RoomInner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/tesseract-fps/level1/RoomTop.gd" type="Script" id=6]
+[ext_resource path="res://scenes/tesseract-fps/level1/RoomBottom.gd" type="Script" id=7]
+[ext_resource path="res://scenes/tesseract-fps/level1/RoomBottom.tscn" type="PackedScene" id=8]
+
+[node name="Y" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="RoomInner" type="Spatial" parent="." instance=ExtResource( 5 )]
+script = ExtResource( 1 )
+
+[node name="RoomTop" type="Spatial" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0 )
+script = ExtResource( 6 )
+
+[node name="RoomOuter" type="Spatial" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40, 0 )
+script = ExtResource( 3 )
+
+[node name="RoomBottom" type="Spatial" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 60, 0 )
+script = ExtResource( 7 )

@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Spatial",
+"class": "Rotator",
+"language": "GDScript",
+"path": "res://components/Rotator.gd"
+}, {
 "base": "Polygon2D",
 "class": "SolidPoly",
 "language": "GDScript",
 "path": "res://components/SolidPoly.gd"
 } ]
 _global_script_class_icons={
+"Rotator": "",
 "SolidPoly": ""
 }
 

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://components/Rotator.gd" type="Script" id=1]
+[ext_resource path="res://scenes/tesseract-fps/level1/overview/X.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/tesseract-fps/level1/overview/Z.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/tesseract-fps/level1/overview/Y.tscn" type="PackedScene" id=4]
+
+[node name="Overview" type="Spatial"]
+
+[node name="Z" parent="." instance=ExtResource( 3 )]
+script = ExtResource( 1 )
+cycle_next = false
+cycle_prev = false
+spacing = 1.0
+
+[node name="X" parent="." instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+cycle_next = false
+cycle_prev = false
+spacing = 1.0
+
+[node name="Y" parent="." instance=ExtResource( 4 )]
+script = ExtResource( 1 )
+cycle_next = false
+cycle_prev = false
+spacing = 1.0
